@@ -46,6 +46,6 @@ String responseJSON = "{\"loggedIn\": " + (memberid != null) + "}";
         });
         
     </script>
-   오늘 저녁은 치킨이다!!
+   현수 컴퓨터로 테스트 
 </body>
 </html>
