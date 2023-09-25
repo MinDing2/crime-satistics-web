@@ -46,6 +46,6 @@ String responseJSON = "{\"loggedIn\": " + (memberid != null) + "}";
         });
         
     </script>
-   final test
+   
 </body>
 </html>
