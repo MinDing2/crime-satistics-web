@@ -46,6 +46,6 @@ String responseJSON = "{\"loggedIn\": " + (memberid != null) + "}";
         });
         
     </script>
-   현수 컴퓨터로 테스트 
+   jmj test
 </body>
 </html>
