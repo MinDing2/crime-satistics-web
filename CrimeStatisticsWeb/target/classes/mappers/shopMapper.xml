@@ -14,10 +14,11 @@
 	
 	<!-- 카테고리별 호신용품 리스트 -->
 	<select id="catePdList" resultType="com.spring.shop.vo.ProductVo">
-		SELECT pdNum, pdName, cateCode, pdPrice, pdStock, pdDes, pdImg, pdDate, pdThumbImg
+		SELECT p.pdNum, p.pdName, p.cateCode, p.pdPrice, p.pdStock, p.pdDes, p.pdImg, p.pdDate, p.pdThumbImg
 		FROM products p
 		INNER JOIN products_category c ON p.cateCode = c.cateCode
 		WHERE p.cateCode = #{cateCode}
+		ORDER BY p.pdNum DESC
 	</select>
 	
 	<!-- 상품 상세조회 -->

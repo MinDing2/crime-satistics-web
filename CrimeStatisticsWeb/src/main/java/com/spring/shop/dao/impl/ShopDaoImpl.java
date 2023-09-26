@@ -26,10 +26,10 @@ public class ShopDaoImpl implements ShopDao {
 		return sqlSession.selectList(namespace + ".allPdList");
 	}
 
+	// 카테고리별 호신용품 리스트
 	@Override
-	public List<ProductVo> catePdList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductVo> catePdList(int cateCode) {
+		return sqlSession.selectList(namespace + ".catePdList", cateCode);
 	}
 
 	// 상품 상세조회

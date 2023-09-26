@@ -23,4 +23,10 @@
 		INSERT INTO products (pdNum, pdName, cateCode, pdPrice, pdStock, pdDes, pdImg, pdThumbImg)
 		VALUES (products_seq.nextval, #{pdName}, #{cateCode}, #{pdPrice}, #{pdStock}, #{pdDes}, #{pdImg}, #{pdThumbImg})
 	</insert>
+	
+	<!-- 상품삭제 -->
+	<delete id="deletePd">
+		DELETE FROM products
+		WHERE pdNum = #{pdNum}
+	</delete>
 </mapper>

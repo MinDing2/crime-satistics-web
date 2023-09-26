@@ -10,6 +10,9 @@ public interface ShopService {
 	// 전체 호신용품 
 	List<ProductVo> allPdList();
 
+	// 카테고리별 호신용품 리스트
+	List<ProductVo> catePdList(int cateCode);
+	
 	// 상품 상세조회
 	ProductVo getView(int pdNum);
 	

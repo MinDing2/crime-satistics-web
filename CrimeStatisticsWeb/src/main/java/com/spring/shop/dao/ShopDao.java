@@ -11,7 +11,7 @@ public interface ShopDao {
 	List<ProductVo> allPdList();
 	
 	// 카테고리별 호신용품 리스트
-	List<ProductVo> catePdList();
+	List<ProductVo> catePdList(int cateCode);
 
 	// 상품 상세조회
 	ProductVo getView(int pdNum);

@@ -26,21 +26,28 @@ ul, lo, li {
 	<main>
 		<ul>
 			<li><a href="/shop/list">전체 호신용품</a></li>
-			<li><a href="#">스프레이건</a></li>
-			<li><a href="#">스프레이</a></li>
-			<li><a href="#">전기충격기</a></li>
-			<li><a href="#">삼단봉</a></li>
+			<li><a href="/shop/list/100">스프레이건</a></li>
+			<li><a href="/shop/list/200">스프레이</a></li>
+			<li><a href="/shop/list/300">전기충격기</a></li>
+			<li><a href="/shop/list/400">삼단봉</a></li>
 		</ul>
 
 		<div>
 			<ul>
-				<c:forEach items="${allProductList}" var="pd">
+				<c:forEach items="${list}" var="pd">
 					<li>
 						<div class="productsThumb">
 							<img src="${pd.pdThumbImg}">
 						</div>
 						<div class="productsName">
-							<a href="/shop/view?n=${pd.pdNum}">${pd.pdName}</a>
+							<c:choose>
+								<c:when test="${not empty sessionScope.adminid}">
+									<a href="/admin/products/view?n=${pd.pdNum}">${pd.pdName}</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/shop/view?n=${pd.pdNum}">${pd.pdName}</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</li>
 				</c:forEach>

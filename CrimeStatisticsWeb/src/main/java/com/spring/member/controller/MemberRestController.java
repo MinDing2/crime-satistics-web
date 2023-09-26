@@ -21,6 +21,7 @@ public class MemberRestController {
 	
 	// 비밀번호 확인
 	@PostMapping("/password-check")
+	@ResponseBody
 	public String passwordCheck(@RequestParam("password") String password, HttpSession session) {
 		String memberid = (String)session.getAttribute("memberid");
 		MemberVo findMember = memberService.findById(memberid);
@@ -33,6 +34,7 @@ public class MemberRestController {
 	
 	// 아이디 중복체크
 	@PostMapping("/id-check-duplicate")
+	@ResponseBody
 	public String idCheckDuplicate(@RequestParam("memberid") String memberid) {
 		MemberVo findMember = memberService.findById(memberid);
 		if (findMember == null) {
@@ -44,6 +46,7 @@ public class MemberRestController {
 	
 	// 닉네임 중복체크
 	@PostMapping("/nickname-check-duplicate")
+	@ResponseBody
 	public String nicknameCheckDuplicate(@RequestParam("nickname") String nickname) {
 		int num = memberService.nicknameCheck(nickname);
 		if (num == 0) {
@@ -55,6 +58,7 @@ public class MemberRestController {
 	
 	// 비밀번호 찾기
 	@PostMapping("/find-password")
+	@ResponseBody
 	public String findPassword(@RequestParam("memberid") String memberid) {
 		MemberVo findMember = memberService.findById(memberid);
 		if (findMember != null) {

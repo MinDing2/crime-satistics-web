@@ -7,7 +7,6 @@ public class AdminVo {
 	private String nickname;
 	private String email;
 	
-	
 	public String getAdminid() {
 		return adminid;
 	}

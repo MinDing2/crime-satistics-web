@@ -59,10 +59,10 @@ ul.category-list li {
 	<main>
 		<ul class="category-list">
 			<li><a href="/shop/list">전체 호신용품</a></li>
-			<li><a href="#">스프레이건</a></li>
-			<li><a href="#">스프레이</a></li>
-			<li><a href="#">전기충격기</a></li>
-			<li><a href="#">삼단봉</a></li>
+			<li><a href="/shop/list/100">스프레이건</a></li>
+			<li><a href="/shop/list/200">스프레이</a></li>
+			<li><a href="/shop/list/300">전기충격기</a></li>
+			<li><a href="/shop/list/400">삼단봉</a></li>
 		</ul>
 		<div id="container"
 			style="display: flex; align-items: center; max-width: 1200px; margin: 0 auto;">

@@ -22,6 +22,12 @@ public class ShopServiceImpl implements ShopService {
 		return shopDao.allPdList();
 	}
 
+	// 카테고리별 호신용품 리스트
+	@Override
+	public List<ProductVo> catePdList(int cateCode) {
+		return shopDao.catePdList(cateCode);
+	}
+	
 	// 상품 상세조회
 	@Override
 	public ProductVo getView(int pdNum) {

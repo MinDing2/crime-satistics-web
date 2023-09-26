@@ -12,10 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.admin.service.AdminService;
 import com.spring.admin.vo.AdminVo;
+import com.spring.shop.service.ShopService;
 import com.spring.shop.vo.CategoryVo;
 import com.spring.shop.vo.ProductVo;
 import com.spring.utils.UploadFileUtils;
@@ -26,6 +29,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private ShopService shopService;
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
@@ -69,7 +75,7 @@ public class AdminController {
 	
 	// 상품 등록
 	@PostMapping("/products/register")
-	public String productsRegister(ProductVo productVo, MultipartFile file) throws Exception {
+	public String productRegister(ProductVo productVo, MultipartFile file) throws Exception {
 		String imgUploadPath = uploadPath;
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
@@ -89,4 +95,18 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
+	// 상품 상세조회
+	@GetMapping("/products/view")
+	public String getProduct(Model model, @RequestParam("n") int pdNum) {
+		ProductVo productVo = shopService.getView(pdNum);
+		model.addAttribute("product", productVo);
+		return "admin/products/view";
+	}
+	
+	// 상품 삭제
+	@GetMapping("/products/delete")
+	public String deleteProduct(@RequestParam("n") int pdNum) {
+		adminService.deletePd(pdNum);
+		return "redirect:/shop/list";
+	}
 }

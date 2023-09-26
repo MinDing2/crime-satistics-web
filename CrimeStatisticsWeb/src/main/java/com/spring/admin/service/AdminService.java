@@ -16,5 +16,8 @@ public interface AdminService {
 	
 	// 상품등록
 	void register(ProductVo productVo);
+
+	// 상품삭제
+	void deletePd(int pdNum);
 	
 }

@@ -37,4 +37,10 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.insert(namespace + ".register", productVo);
 	}
 
+	// 상품삭제
+	@Override
+	public void deletePd(int pdNum) {
+		sqlSession.delete(namespace + ".deletePd", pdNum);
+	}
+
 }
