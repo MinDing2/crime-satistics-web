@@ -32,5 +32,6 @@
      <a href="/board/listpage">글 목록(페이징)</a>
      <a href="/board/listsearch?menu_id=1">글 목록(페이징&검색)</a>
 	<footer><%@ include file="template/footer.jsp"%></footer>
+  merge 테스트
 </body>
 </html>
