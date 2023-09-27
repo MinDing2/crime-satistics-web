@@ -100,18 +100,25 @@
 	<!-- 검색 -->
 	<select id="listSearch" resultType="com.spring.board.vo.BoardVo"
 		parameterType="com.spring.board.domain.SearchCriteria">
-	SELECT BNUM,MENU_ID,TITLE, CONT, WRITER, TO_CHAR(REGDATE, '""YYYY"년 "MM"월 "DD"일"') REGDATE, READCOUNT
+	SELECT BNUM,MENU_ID,TITLE, CONT, WRITER, TO_CHAR(REGDATE, '""YYYY"년 "MM"월 "DD"일"') REGDATE, READCOUNT, LIKEHIT
 		FROM (
-		SELECT BNUM,MENU_ID, TITLE, CONT, WRITER, REGDATE, READCOUNT,
-		ROW_NUMBER() OVER(ORDER BY BNUM DESC) AS RNUM
+		SELECT BNUM,MENU_ID, TITLE, CONT, WRITER, REGDATE, READCOUNT, LIKEHIT,
+		ROW_NUMBER() OVER(<include refid="sort"></include>) AS RNUM
 		FROM BOARD
 	    WHERE MENU_ID = #{menu_id}
 	    <include refid="search"></include>
 	     ) MB
 	    WHERE RNUM between #{rowStart} and #{rowEnd}
-		ORDER BY BNUM DESC
+		<include refid="sort"></include>
 	</select>
 	
+
+<select id="countSearch" resultType="int">
+    SELECT count(bnum)
+    FROM board
+    WHERE MENU_ID = #{menu_id}
+    <include refid="search"></include>
+</select>
 <sql id="search">
         <if test="searchType != null and keyword != null and keyword != ''">
             <if test="searchType == 't'.toString()">AND title like '%' || #{keyword} || '%'</if>
@@ -120,11 +127,18 @@
             <if test="searchType == 'tc'.toString()">AND (title like '%' || #{keyword} || '%' OR cont like '%' || #{keyword} || '%')</if>
         </if>
 </sql>
-
-<select id="countSearch" resultType="int">
-    SELECT count(bnum)
-    FROM board
-    WHERE MENU_ID = #{menu_id}
-    <include refid="search"></include>
-</select>
+<sql id="sort">
+	<if test="sort== null">
+	ORDER BY BNUM DESC
+	</if>
+	<if test="sort== 'bnum'">
+	ORDER BY BNUM DESC
+	</if>
+	<if test="sort== 'readcount'">
+	ORDER BY READCOUNT DESC
+	</if>
+	<if test="sort== 'likehit'">
+	ORDER BY LIKEHIT DESC
+	</if>
+</sql>
 </mapper>

@@ -42,23 +42,6 @@ public class BoardController {
 	@Autowired
 	private LikeService likeService;
 
-	// 게시글 목록 /board/list?menu_id = 1
-	@GetMapping("/list")
-	public ModelAndView list(BoardVo vo) {
-
-		// 메뉴목록
-		List<MenuVo> menuList = menuService.getMenuList();
-
-		// 게시물 목록
-		List<BoardVo> boardList = boardService.getBoardList(vo);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("vo", vo);
-		mv.addObject("menuList", menuList);
-		mv.addObject("boardList", boardList);
-		mv.setViewName("board/list");
-		return mv;
-
-	}
 
 	// 게시물 등록 /board/writeform?menu_id=1
 	@GetMapping("/writeform")
@@ -160,38 +143,8 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/board/listsearch?menu_id=" +  vo.getMenu_id());
 		return mv;
-	}
-	
-	// 게시물 목록 + 페이징 추가
-	@GetMapping("/listpage")
-	public ModelAndView listpage(BoardVo vo, Criteria cri) {
+	}	
 
-		// 메뉴목록
-		List<MenuVo> menuList = menuService.getMenuList();
-        
-		// 현재 메뉴이름
-		String  menuname  = menuService.getMenuName( vo.getMenu_id() );
-
-		// 게시물 목록
-		List<BoardVo> boardList = boardService.listPage(cri);
-		
-		// 페이지
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.listCount(vo));
-		int endpageCount = (int) pageMaker.getTotalCount() / pageMaker.getDisplayPageNum();
-		ModelAndView mv = new ModelAndView();
-
-		mv.addObject("vo", vo);
-		mv.addObject("name", menuname);
-		mv.addObject("pageMaker",pageMaker);
-		mv.addObject("menuList", menuList);
-		mv.addObject("boardList", boardList);
-		mv.addObject("endpageCount", endpageCount);
-		mv.setViewName("board/listpage");
-		return mv;
-
-	}
 	//게시물 목록 ( 검색 + 페이징 )
 	@GetMapping("/listsearch")
 	public ModelAndView listsearch(BoardVo vo, SearchCriteria scri) {

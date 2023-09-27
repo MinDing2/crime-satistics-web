@@ -16,7 +16,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style></style>
+  <style>
+  #sort{ text-decoration: none; color:black; font-weight: bold; }
+  #sort:hover{color:red;}
+  </style>
 </head>
 <body>
 <header><%@ include file="../template/header.jsp"%></header>
@@ -33,7 +36,7 @@
       <a href="/" class="btn btn-primary">메인</a>
     </div>
 <!-- 검색창 -->
-<div class="search text-center p-3" style="width: 30%;">
+<div class="search text-center p-3" style="width: 30%; margin-left:50px;">
     <div class="input-group">
         <select class="form-select" name="searchType">
             <option value="n" <c:out value="${scri.searchType == null ? 'selected' : ''}" /> >-----</option>
@@ -45,7 +48,14 @@
         <input type="text" class="form-control" name="keyword" id="keywordInput" value="${scri.keyword}" style="width: 50%;" />
         <button id="searchBtn" class="btn btn-primary">검색</button>
     </div>
-</div>
+	</div>
+	<!-- 정렬 -->
+	<div style="text-align: right; margin-right:50px;">
+		<a id="sort" href="/board/listsearch?menu_id=${vo.menu_id}&searchType=${scri.searchType}&keyword=${scri.keyword}&sort=bnum" >최신순</a>
+  		<a id="sort" href="/board/listsearch?menu_id=${vo.menu_id}&searchType=${scri.searchType}&keyword=${scri.keyword}&sort=readcount" >조회순</a>
+  		<a id="sort" href="/board/listsearch?menu_id=${vo.menu_id}&searchType=${scri.searchType}&keyword=${scri.keyword}&sort=likehit" >추천순</a>
+	</div>
+<!-- 리스트 -->
 <div>
     <table class="table table-hover" style="width:95%; margin:auto;">
       <thead>
