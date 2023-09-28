@@ -94,7 +94,6 @@ public class QuestionDaoImpl implements QuestionDao {
 	 
 	 return sqlSession.selectOne(namespace + ".searchCount", data); 
 	}
-	
 }
 
 

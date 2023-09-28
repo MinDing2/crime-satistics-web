@@ -92,7 +92,7 @@
 	
 	<if test='searchType.equals("title_content")'>
 		WHERE question_title like '%' || #{keyword} || '%'
-			or WHERE question_content like '%' || #{keyword} || '%'
+			or question_content like '%' || #{keyword} || '%'
 	</if>
 	
 	<if test='searchType.equals("m.nickname")'>
@@ -104,7 +104,7 @@
     	FETCH FIRST #{postNum} ROWS ONLY
 	</select>
 
-	<!-- 게시물 총 갯수 + 검색 적용 -->
+	<!-- 질문 총 갯수 + 검색 적용 -->
 	<select id="searchCount" parameterType="hashMap"
 		resultType="int">
 		select count(question_id) from question q
@@ -115,13 +115,12 @@
 		</if>
 
 		<if test='searchType.equals("question_content")'>
-			WHERE question_title like '%' || #{keyword} || '%'
+			WHERE question_content like '%' || #{keyword} || '%'
 		</if>
-
+		
 		<if test='searchType.equals("title_content")'>
-			WHERE question_title like '%' || #{keyword} || '%'
-			or WHERE
-			question_content like '%' || #{keyword} || '%'
+    		WHERE question_title LIKE '%' || #{keyword} || '%'
+    		OR question_content LIKE '%' || #{keyword} || '%'
 		</if>
 
 		<if test='searchType.equals("m.nickname")'>
