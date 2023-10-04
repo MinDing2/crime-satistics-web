@@ -30,7 +30,7 @@
     <!-- 왼쪽 열: 지도 -->
     <div class="col-md-6">
       <div class="svg-container">
-        <object id= "mapSvg "data="/img/southKoreaHigh.svg" width="100%" height="100%"></object>
+        <object id= "mapSvg "data="/img/southKorea.svg" width="100%" height="100%"></object>
       </div>
     </div>
     
