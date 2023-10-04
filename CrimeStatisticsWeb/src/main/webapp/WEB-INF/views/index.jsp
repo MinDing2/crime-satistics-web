@@ -20,7 +20,7 @@
   #menu{font-size:30px; text-align: left;}
   #board{font-size:30px; text-align: left;}
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body style="background-color: #cccccc; height: 150vh;">
 	<header><%@ include file="template/header.jsp"%></header>
@@ -30,7 +30,7 @@
     <!-- 왼쪽 열: 지도 -->
     <div class="col-md-6">
       <div class="svg-container">
-        <object data="/img/southKoreaMap.svg" width="100%" height="100%"></object>
+        <object id= "mapSvg "data="/img/southKoreaHigh.svg" width="100%" height="100%"></object>
       </div>
     </div>
     
@@ -48,31 +48,31 @@
     <tbody>
       <tr>
         <td>강간</td>
-        <td><span id="gangOccurrence"></span></td>
+        <td><span id="gangOccurrence">100</span></td>
         <td><span id="gangArrest"></span></td>
         <td><span id="gangArrestRate"></span></td>
       </tr>
       <tr>
         <td>강도</td>
-        <td><span id="robberOccurrence"></span></td>
+        <td><span id="robberOccurrence">100</span></td>
         <td><span id="robberArrest"></span></td>
         <td><span id="robberArrestRate"></span></td>
       </tr>
       <tr>
         <td>살인</td>
-        <td><span id="murderOccurrence"></span></td>
+        <td><span id="murderOccurrence">100</span></td>
         <td><span id="murderArrest"></span></td>
         <td><span id="murderArrestRate"></span></td>
       </tr>
       <tr>
         <td>절도</td>
-        <td><span id="theftOccurrence"></span></td>
+        <td><span id="theftOccurrence">100</span></td>
         <td><span id="theftArrest"></span></td>
         <td><span id="theftArrestRate"></span></td>
       </tr>
       <tr>
         <td>폭력</td>
-        <td><span id="violentOccurrence"></span></td>
+        <td><span id="violentOccurrence">100</span></td>
         <td><span id="violentArrest"></span></td>
         <td><span id="violentArrestRate"></span></td>
       </tr>
@@ -80,14 +80,63 @@
   </table>
     </div>
   </div>
-  <div id="data"></div>
+  <div class="col-md-6">
+  <div id="data">
+    <canvas id="crimeDonutChart" width="400" height="400"></canvas>
+  </div>
+</div>
   <button type="button" onclick="loadUlsan()">울산 범죄 데이터 불러오기</button>
-  <button type="button" onclick="loadIncheon()">인천 범죄 데이터 불러오기</button>
+  <button type="button" onclick="loadChungbuk()">범죄 데이터 불러오기</button>
 	 <div id="menu"><a href="/menus/list">메뉴 목록</a></div>
      <div id="menu"><a href="/menus/writeform">메뉴 등록</a></div>
      <a href="/board/listpage">글 목록(페이징)</a>
      <a href="/board/listsearch?menu_id=1">글 목록(페이징&검색)</a>
 	<footer><%@ include file="template/footer.jsp"%></footer>
 </body>
+<script>
+var myChart; // 전역 변수로 차트 객체를 선언합니다.
+
+window.onload = function() {
+  // 초기 데이터로 차트를 생성합니다.
+  createChart();
+};
+
+function createChart() {
+  // 표의 데이터를 JavaScript 객체로 추출합니다.
+  var gangOccurrence = parseInt(document.getElementById('gangOccurrence').textContent);
+  var robberOccurrence = parseInt(document.getElementById('robberOccurrence').textContent);
+  var murderOccurrence = parseInt(document.getElementById('murderOccurrence').textContent);
+  var theftOccurrence = parseInt(document.getElementById('theftOccurrence').textContent);
+  var violentOccurrence = parseInt(document.getElementById('violentOccurrence').textContent);
+
+  // 발생 건수 데이터를 가지고 있는 JavaScript 객체를 생성합니다.
+  var data = {
+    labels: ['강간', '강도', '살인', '절도', '폭력'],
+    datasets: [{
+      data: [gangOccurrence, robberOccurrence, murderOccurrence, theftOccurrence, violentOccurrence],
+      backgroundColor: ['red', 'blue', 'green', 'yellow', 'orange'],
+    }],
+  };
+
+  // 기존 차트 객체를 삭제합니다.
+  if (myChart) {
+    myChart.destroy();
+  }
+
+  // 도넛 차트를 생성합니다.
+  var ctx = document.getElementById('crimeDonutChart').getContext('2d');
+  myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      // 그 외 차트 옵션을 설정할 수 있습니다.
+    },
+  });
+}
+	
+
+</script>
 <script type="text/javascript" src="/js/api.js"></script>
 </html>
