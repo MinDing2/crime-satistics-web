@@ -15,7 +15,7 @@
       INNER JOIN member m ON q.memberid = m.memberid
    </select>
    
-	<!--  질문 삽입  -->
+	<!--  질문 작성  -->
 	<insert id="writeQuestion" >
 		insert into question( memberid, question_title, question_content)
 		values(#{ memberid }, #{ question_title }, #{ question_content })

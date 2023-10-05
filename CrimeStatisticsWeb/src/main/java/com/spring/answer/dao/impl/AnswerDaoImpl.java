@@ -15,6 +15,7 @@ public class AnswerDaoImpl implements AnswerDao {
 	 @Autowired
 	 private SqlSession sql;
 	private static String namespace = "Answer";
+	
 	//댓글 조회
 	@Override
 	public List<AnswerVo> list(int bno) {
@@ -36,9 +37,4 @@ public class AnswerDaoImpl implements AnswerDao {
 	public void delete(AnswerVo vo) {
 		sql.delete(namespace + ".AnswerDelete", vo);
 	}
-
-		
-
-		
-	
 }
