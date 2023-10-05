@@ -218,6 +218,7 @@
             document.getElementById("violentArrestRate").innerText = (violentData[1] / violentData[0] * 100).toFixed(2) + "%";
 
             createChart();	
+            arrChart();
         });
 }
 
@@ -330,7 +331,7 @@
             document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
             
             createChart();          
-           
+            arrChart();
 
           });
 
@@ -456,7 +457,7 @@
             document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
             
             createChart();
-            
+            arrChart();
           });
 
     }
@@ -530,7 +531,7 @@
             document.getElementById("violentArrestRate").innerText = (arrviolentData[0] / occviolentData[0] * 100).toFixed(2) + "%";
             
             createChart();	
-            
+            arrChart();
         });
   }
   
@@ -656,8 +657,8 @@
         //const filteredDataString = JSON.stringify(occGangSum, null, 1);
         //document.getElementById("data").innerText = filteredDataString;
         
-        createChart();	
-      
+         createChart();	
+         arrChart();
       });
 }
 //경기
@@ -743,7 +744,7 @@ function loadGyeonggi() {
           document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
           
           createChart();	
-          
+          arrChart();
       });
 }
 
@@ -829,7 +830,7 @@ function loadSejong() {
         document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
         
         createChart();	
-     
+     	arrChart();
   });
 }
 //충남
@@ -914,7 +915,7 @@ function loadChungnam() {
         document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
         
         createChart();	
-        
+        arrChart();
   });
 }
 // 충북
@@ -996,6 +997,7 @@ function loadChungbuk() {
         document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
         
         createChart();	
+        arrChart();
   });
 }
 //경남
@@ -1074,6 +1076,7 @@ function loadChungbuk() {
                  document.getElementById("violentArrestRate").innerText = (totalViolenceArrest / totalViolenceOccurrence * 100).toFixed(2) + "%";
                  
                  createChart();	
+                 arrChart();
              });
      }
      
@@ -1259,7 +1262,7 @@ function loadChungbuk() {
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
                
                createChart();	
-                                    
+               arrChart();      
      });         
   }
   
@@ -1404,7 +1407,7 @@ function loadChungbuk() {
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
                
                createChart();	
-              
+               arrChart();
      });         
   }
   
@@ -1552,6 +1555,7 @@ function loadChungbuk() {
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
          
 			   createChart();	
+			   arrChart();
          });   
   }
   
@@ -1706,6 +1710,7 @@ function loadChungbuk() {
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
                
                createChart();	
+               arrChart();
 
   });   
 
@@ -1854,7 +1859,7 @@ function loadChungbuk() {
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
                
                createChart();	
-
+			   arrChart();
      });
   }
 //부산
@@ -2000,6 +2005,7 @@ function loadBusan(){
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
                
                createChart();	
+               arrChart();
   });
 }
   
@@ -2147,7 +2153,8 @@ function loadDaegu(){
                document.getElementById("violentArrest").innerText     = aVSum;
                //검거율
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
-                  createChart();	
+                  createChart();
+                 arrChart();	
   });
 }
     				

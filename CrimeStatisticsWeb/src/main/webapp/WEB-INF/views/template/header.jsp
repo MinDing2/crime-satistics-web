@@ -153,8 +153,14 @@
       <div class="offcanvas-body" style= "background-color: rgba(8, 35, 56, 0.4)">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" style="text-align: center; font-size: 25px;">자유게시판</a>
+            <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: center; font-size: 25px;">자유게시판</a>
+              <ul class="dropdown-menu dropdown-menu-dark" >
+                <li><a  class="dropdown-item" href="/question/list">Q&A 게시판</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a  class="dropdown-item" href="/question/writeform">질문 작성</a></li>
+            </ul>
           </li>
+            
           <li class="nav-item">
             <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: center; font-size: 25px;">
                 지역 별 게시판
