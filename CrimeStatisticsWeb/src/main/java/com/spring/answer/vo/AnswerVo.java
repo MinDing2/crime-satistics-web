@@ -1,17 +1,18 @@
 package com.spring.answer.vo;
+import java.util.Date;
 
 public class AnswerVo {
-	private int answer_id; 
+	private String answer_id; 
 	private int question_id;
 	private String adminid; 
 	private String answer_cont; 
 	private String answer_title; 
-	private int create_date;
+	private Date create_date;
 	
 	public AnswerVo() {}
 
-	public AnswerVo(int answer_id, int question_id, String adminid, String answer_cont, String answer_title,
-			int create_date) {
+	public AnswerVo(String answer_id, int question_id, String adminid, String answer_cont, String answer_title,
+			Date create_date) {
 		super();
 		this.answer_id = answer_id;
 		this.question_id = question_id;
@@ -36,10 +37,10 @@ public class AnswerVo {
 		this.answer_title = answer_title;
 	}
 
-	public int getAnswer_id() {
+	public String getAnswer_id() {
 		return answer_id;
 	}
-	public void setAnswer_id(int answer_id) {
+	public void setAnswer_id(String answer_id) {
 		this.answer_id = answer_id;
 	}
 	public int getQuestion_id() {
@@ -60,10 +61,10 @@ public class AnswerVo {
 	public void setAnswer_cont(String answer_cont) {
 		this.answer_cont = answer_cont;
 	}
-	public int getCreate_date() {
+	public Date getCreate_date() {
 		return create_date;
 	}
-	public void setCreate_date(int create_date) {
+	public void setCreate_date(Date create_date) {
 		this.create_date = create_date;
 	}
 	

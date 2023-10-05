@@ -22,7 +22,10 @@
 			<div>아이디</div> 
 			<input type="text" name="memberid" id="memberid" value="${member.memberid}" minlength="8" maxlength="16" size="30" readonly disabled /><br /><br />
 			<input type="hidden" name="memberid" value="${member.memberid}" />
-			<div>현재 비밀번호</div> 
+			<div>현재 비밀번호</div
+			;]
+			;
+			]> 
 			<input type="password" name="passwd" id="password" size="30" value="" /> <br />
 			<span id="pwdcheck_blank" style="font-size: 10px;"></span><br />
 			<div>새 비밀번호</div> 

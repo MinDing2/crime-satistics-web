@@ -1,3 +1,9 @@
+
+<%
+String memberid = (String) session.getAttribute("memberid");
+String responseJSON = "{\"loggedIn\": " + (memberid != null) + "}";
+%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -30,12 +36,13 @@
     <!-- 왼쪽 열: 지도 -->
     <div class="col-md-6">
       <div class="svg-container">
-        <object id= "mapSvg "data="/img/southKorea.svg" width="100%" height="100%"></object>
+        <object id= "mapSvg "data="/img/southKoreaHigh.svg" width="100%" height="100%"></object>
       </div>
     </div>
     
     <!-- 오른쪽 열: 표 -->
     <div class="col-md-6">
+    	<div class = "table-container">
       <table class="table table-bordered">
     <thead>
       <tr>
@@ -76,24 +83,43 @@
         <td><span id="violentArrest"></span></td>
         <td><span id="violentArrestRate"></span></td>
       </tr>
-    </tbody>
-  </table>
-    </div>
+  	  </tbody>
+  	</table>
   </div>
-  <div class="col-md-6">
-  <div id="data">
-    <canvas id="crimeDonutChart" width="400" height="400"></canvas>
+   		<div class = "chart-container" id="data">
+    		<canvas id="crimeDonutChart" width="400" height="400"></canvas>
+  		</div>
+     </div>
   </div>
-</div>
+  
+
+
   <button type="button" onclick="loadUlsan()">울산 범죄 데이터 불러오기</button>
   <button type="button" onclick="loadChungbuk()">범죄 데이터 불러오기</button>
-	 <div id="menu"><a href="/menus/list">메뉴 목록</a></div>
-     <div id="menu"><a href="/menus/writeform">메뉴 등록</a></div>
-     <a href="/board/listpage">글 목록(페이징)</a>
-     <a href="/board/listsearch?menu_id=1">글 목록(페이징&검색)</a>
 	<footer><%@ include file="template/footer.jsp"%></footer>
+	
+	 <p><a href="/question/list">질문 리스트</a></p>           
+    <button type="button" id="writeform">질문 작성</button>
+	
 </body>
+
 <script>
+
+var responseData = <%= responseJSON %>; // JSON 데이터를 JavaScript 객체로 파싱
+
+// 버튼 클릭 이벤트 리스너 추가
+document.getElementById("writeform").addEventListener("click", function() {
+    // 사용자 정보가 null이 아닌 경우
+    if (responseData.loggedIn) {
+        location.href = '/question/writeform'; // 작성 폼으로 이동
+    } else {
+        alert('로그인을 먼저 해주세요'); // 로그인 되지 않은 경우 경고 메시지 표시
+        location.href = '/member/login-page';
+    }
+});
+
+
+
 var myChart; // 전역 변수로 차트 객체를 선언합니다.
 
 window.onload = function() {
@@ -114,7 +140,13 @@ function createChart() {
     labels: ['강간', '강도', '살인', '절도', '폭력'],
     datasets: [{
       data: [gangOccurrence, robberOccurrence, murderOccurrence, theftOccurrence, violentOccurrence],
-      backgroundColor: ['red', 'blue', 'green', 'yellow', 'orange'],
+      backgroundColor: [  
+    	   'rgb(255, 99, 132)',   // Red (강간)
+    	    'rgb(54, 162, 235)',   // Blue (절도)
+    	    'rgb(255, 205, 86)',   // Yellow (폭력 - Changed to Yellow)
+    	    'rgb(75, 192, 192)',   // Teal (살인 - Changed to Teal)
+    	    'rgb(255, 159, 64)',   // Orange (강도)   
+    	    ],
     }],
   };
 

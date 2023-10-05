@@ -2,6 +2,7 @@ package com.spring.question.controller;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.answer.service.AnswerService;
+import com.spring.answer.vo.AnswerVo;
 import com.spring.member.service.MemberService;
 import com.spring.member.vo.MemberVo;
 import com.spring.question.service.QuestionService;
@@ -27,7 +30,10 @@ public class QuestionController {
 	
 	@Autowired
 	private MemberService memberService;
-
+	
+	@Inject
+	private AnswerService answerService;
+	
 	//질문 목록
 	@GetMapping("/list")
 	 public String getList(Model model){
@@ -60,7 +66,12 @@ public class QuestionController {
 	public void getView(@RequestParam("question_id") int question_id, Model model) {
 		QuestionVo vo = questionService.view(question_id);
 		
-		model.addAttribute("view", vo);		
+		model.addAttribute("view", vo);
+		
+		// 댓글 조회
+		List<AnswerVo> reply = null;
+		reply = answerService.list(question_id);
+		model.addAttribute("reply", reply);
 	}
 	
 	//질문 수정 폼

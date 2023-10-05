@@ -413,7 +413,7 @@
             //폭력 검거 건수
             let arrViolentSum = 0;
             arrViolData.forEach(item => {
-              arrViolentSum += item.강화서 + item.계양서 + item.남동서 + item.논현서 + item.미추홀서 + item.부평서 + item.삼산서 + item.서부서 + item.연수서 + item.중부서;
+              arrViolentSum += item.강화서 + item.계양서 + item.남동서 + item.논현서 + item.미추홀서 + item.부평서 + item.삼산서 + item.서부서 + item.연수서 + item.중부서;             
             });    	        
             
       // 화면에 데이터 넣기
@@ -528,6 +528,8 @@
             document.getElementById("violentOccurrence").innerText = occviolentData[0];
             document.getElementById("violentArrest").innerText = arrviolentData[0];
             document.getElementById("violentArrestRate").innerText = (arrviolentData[0] / occviolentData[0] * 100).toFixed(2) + "%";
+            
+            createChart();	
             
         });
   }
@@ -740,6 +742,8 @@ function loadGyeonggi() {
           // 검거율
           document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
           
+          createChart();	
+          
       });
 }
 
@@ -823,6 +827,8 @@ function loadSejong() {
         document.getElementById("violentArrest").innerText = arrViolentSum;
         // 검거율
         document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
+        
+        createChart();	
      
   });
 }
@@ -907,6 +913,8 @@ function loadChungnam() {
         // 검거율
         document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
         
+        createChart();	
+        
   });
 }
 // 충북
@@ -987,6 +995,7 @@ function loadChungbuk() {
         // 검거율
         document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
         
+        createChart();	
   });
 }
 //경남
@@ -1063,6 +1072,8 @@ function loadChungbuk() {
                  document.getElementById("violentOccurrence").innerText = totalViolenceOccurrence;
                  document.getElementById("violentArrest").innerText = totalViolenceArrest;
                  document.getElementById("violentArrestRate").innerText = (totalViolenceArrest / totalViolenceOccurrence * 100).toFixed(2) + "%";
+                 
+                 createChart();	
              });
      }
      
@@ -1246,6 +1257,8 @@ function loadChungbuk() {
                document.getElementById("violentArrest").innerText     = aVSum;
                //검거율
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
+               
+               createChart();	
                                     
      });         
   }
@@ -1389,78 +1402,10 @@ function loadChungbuk() {
                document.getElementById("violentArrest").innerText     = aVSum;
                //검거율
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
+               
+               createChart();	
               
      });         
-  }
-  
-  
-  
-  
-  //전북
-         function loadNJ(){
-         
-           //살인
-        oMSum = 33;
-        aMSum = 33;
-        //강간
-        oGSum = 625;
-        aGSum = 592;
-       //강도          
-        oRSum = 11;
-        aRSum = 11;
-        //절도
-        oTSum = 5629;
-        aTSum = 3860;
-        //폭행 
-        oVSum = 7019;
-        aVSum = 6164;   
-              
-        // 화면에 데이터 넣기
-              
-        //살인 
-               
-         //발생
-         document.getElementById("murderOccurrence").innerText = oMSum;
-         //검거
-         document.getElementById("murderArrest").innerText = aMSum;
-         //검거율
-         document.getElementById("murderArrestRate").innerText = (aMSum / oMSum * 100).toFixed(2) + "%";
-              
-        //강도 
-               
-         //발생
-         document.getElementById("robberOccurrence").innerText = oRSum;
-         //검거
-         document.getElementById("robberArrest").innerText = aRSum;
-         //검거율
-         document.getElementById("robberArrestRate").innerText = (aRSum / oRSum * 100).toFixed(2) + "%";
-              
-        //성범죄
-               
-         //발생
-         document.getElementById("gangOccurrence").innerText = oGSum;
-         //검거
-         document.getElementById("gangArrest").innerText = aGSum;
-         //검거율
-         document.getElementById("gangArrestRate").innerText = (aGSum / oGSum * 100).toFixed(2) + "%";
-              
-        //절도 
-               
-         //발생
-         document.getElementById("theftOccurrence").innerText = oTSum;
-         //검거
-         document.getElementById("theftArrest").innerText = aTSum;
-         //검거율
-               document.getElementById("theftArrestRate").innerText = ( aTSum / oTSum * 100).toFixed(2) + "%";
-              
-        //폭력 
-               
-         //발생
-         document.getElementById("violentOccurrence").innerText = oVSum;
-         //검거
-         document.getElementById("violentArrest").innerText     = aVSum;
-         //검거율
-         document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";      
   }
   
   
@@ -1606,7 +1551,7 @@ function loadChungbuk() {
                //검거율
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
          
-                  
+			   createChart();	
          });   
   }
   
@@ -1759,6 +1704,8 @@ function loadChungbuk() {
                document.getElementById("violentArrest").innerText     = aVSum;
                //검거율
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
+               
+               createChart();	
 
   });   
 
@@ -1905,6 +1852,8 @@ function loadChungbuk() {
                document.getElementById("violentArrest").innerText     = aVSum;
                //검거율
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
+               
+               createChart();	
 
      });
   }
@@ -2049,6 +1998,8 @@ function loadBusan(){
                document.getElementById("violentArrest").innerText     = aVSum;
                //검거율
                document.getElementById("violentArrestRate").innerText = (aVSum / oVSum * 100).toFixed(2) + "%";
+               
+               createChart();	
   });
 }
   
