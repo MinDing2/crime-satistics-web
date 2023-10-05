@@ -73,6 +73,7 @@
     
     <!-- 오른쪽 열: 표 -->
     <div class="col-md-6">
+   
     	<div class = "table-container">
       <table class="table table-bordered">
     <thead>
@@ -134,6 +135,23 @@
 </body>
 
 <script>
+<<<<<<< refs/remotes/origin/jmj
+=======
+
+//var responseData = <%= responseJSON %>; 
+
+// 버튼 클릭 이벤트 리스너 추가
+//document.getElementById("writeform").addEventListener("click", function() {
+    // 사용자 정보가 null이 아닌 경우
+   // if (responseData.loggedIn) {
+   //     location.href = '/question/writeform'; // 작성 폼으로 이동
+  //  } else {
+  //      alert('로그인을 먼저 해주세요'); // 로그인 되지 않은 경우 경고 메시지 표시
+ //       location.href = '/member/login-page';
+ //   }
+//});
+
+>>>>>>> submit';'
 var myChart; // 전역 변수로 차트 객체를 선언합니다.
 var myArrChart;
 window.onload = function() {
@@ -242,6 +260,15 @@ function arrChart(){
 	    },
 	  });
 }
+<<<<<<< refs/remotes/origin/jmj
+=======
+
+
+
+
+
+>>>>>>> submit';'
 </script>
+
 <script type="text/javascript" src="/js/api.js"></script>
 </html>
