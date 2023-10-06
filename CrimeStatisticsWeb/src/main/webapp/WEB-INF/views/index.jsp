@@ -1,9 +1,3 @@
-
-<%
-String memberid = (String) session.getAttribute("memberid");
-String responseJSON = "{\"loggedIn\": " + (memberid != null) + "}";
-%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -140,20 +134,6 @@ String responseJSON = "{\"loggedIn\": " + (memberid != null) + "}";
 </body>
 
 <script>
-
-//var responseData = <%= responseJSON %>; 
-
-// 버튼 클릭 이벤트 리스너 추가
-//document.getElementById("writeform").addEventListener("click", function() {
-    // 사용자 정보가 null이 아닌 경우
-   // if (responseData.loggedIn) {
-   //     location.href = '/question/writeform'; // 작성 폼으로 이동
-  //  } else {
-  //      alert('로그인을 먼저 해주세요'); // 로그인 되지 않은 경우 경고 메시지 표시
- //       location.href = '/member/login-page';
- //   }
-//});
-
 var myChart; // 전역 변수로 차트 객체를 선언합니다.
 var myArrChart;
 window.onload = function() {
@@ -262,12 +242,6 @@ function arrChart(){
 	    },
 	  });
 }
-
-
-
-
-
 </script>
-
 <script type="text/javascript" src="/js/api.js"></script>
 </html>

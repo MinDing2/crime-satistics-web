@@ -10,10 +10,10 @@
 </head>
 <body>
 	<form method="post" action="/question/write">
-	   
+		   	
 		<label>제목</label>
 		<input type="text" name="question_title" /> <br />
-		<input type="text" name="memberid" value="${nickname}" readonly /> <br />
+		<input type="text" name="memberid" value="${ nickname }" readonly /> <br />
 		<label>내용</label>
 		<textarea cols="50"  rows ="5" name="question_content" /></textarea><br />
 		

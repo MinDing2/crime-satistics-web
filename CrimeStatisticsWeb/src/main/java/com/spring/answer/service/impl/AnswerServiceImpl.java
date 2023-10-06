@@ -2,6 +2,7 @@ package com.spring.answer.service.impl;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,26 +14,18 @@ import com.spring.answer.vo.AnswerVo;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
-	@Inject
-	AnswerDao dao;
+	
+	@Autowired
+	private AnswerDao dao;
 
 	@Override
-	public List<AnswerVo> list(int answer_id) {
-		return dao.list(answer_id);
+	public List<AnswerVo> list(int quesiton_id) {
+		return dao.list(quesiton_id);
 	}
 
 	@Override
 	public void write(AnswerVo vo) {
-		dao.write(vo);		
+		dao.write(vo);
 	}
-
-	@Override
-	public void modify(AnswerVo vo) {
-		dao.modify(vo);
-	}
-
-	@Override
-	public void delete(AnswerVo vo) {
-		dao.delete(vo);
-	}
+	
 }

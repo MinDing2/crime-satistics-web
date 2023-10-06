@@ -16,23 +16,18 @@ import com.spring.question.service.QuestionService;
 @Controller
 @RequestMapping("/answer")
 public class AnswerController {
-	@Inject
-	private QuestionService questionservice; 
-	@Inject
+	
+	@Autowired
 	private AnswerService answerService;
 	
 	//댓글 조회
 	
-	//답글 작성
-	@PostMapping("/write")
-	public String postwrite(AnswerVo vo, HttpSession session) {
-		String adminid = (String)session.getAttribute("adminid");
-		vo.setAdminid(adminid);
-		answerService.write(vo);
+	//댓글 작성
+	@PostMapping("/writewAnswer")
+	public String posttWrite(AnswerVo vo) {
 		
-		return "redirect:/question/view?quewtion_id=" + vo.getQuestion_id();	
+		System.out.println(vo);
+		answerService.write(vo);
+		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 	}
-	//댓글 수정
-	
-	//댓글 삭제 
 }

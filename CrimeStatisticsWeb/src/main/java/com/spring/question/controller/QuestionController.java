@@ -2,6 +2,7 @@ package com.spring.question.controller;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.answer.service.AnswerService;
 import com.spring.answer.vo.AnswerVo;
+
 import com.spring.member.service.MemberService;
 import com.spring.member.vo.MemberVo;
 import com.spring.question.service.QuestionService;
@@ -31,7 +33,7 @@ public class QuestionController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Inject
+	@Autowired
 	private AnswerService answerService;
 	
 	//질문 목록
@@ -48,6 +50,7 @@ public class QuestionController {
 		String memberid = (String)session.getAttribute("memberid");
 
 		MemberVo findMember = memberService.findById(memberid);
+		
 		model.addAttribute("memberid", memberid);
 		model.addAttribute("nickname", findMember.getNickname());
 		return "question/write";
@@ -55,23 +58,44 @@ public class QuestionController {
 	//질문 작성 
 	@PostMapping("/write")
 	public String postwrite(QuestionVo vo, HttpSession session) {
+		
 		String memberid = (String)session.getAttribute("memberid");
 		vo.setMemberid(memberid);
+		
 		questionService.insertQuestion(vo);
 		return "redirect:/question/list";	
 	}
 	
-	//질문 조회 
-	@GetMapping("/view")
-	public void getView(@RequestParam("question_id") int question_id, Model model) {
-		QuestionVo vo = questionService.view(question_id);
+	//답글 작성 (관리자)
+	@PostMapping("/writeAnswer")
+	public String postwriteAnswer(QuestionVo vo, HttpSession session) {
 		
+		//adminid 값 받아서 nickname값 가져오기 
+		String adminid = (String)session.getAttribute("adminid");
+		vo.setMemberid(adminid);
+		
+		//기다려 만들거야 
+		//answerService.insertQuestion(vo);
+		
+		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
+	}
+	
+	
+	//질문 조회 + 작성  잠만
+	@GetMapping("/view")
+	public void getView(@RequestParam("question_id") int question_id, Model model, HttpSession session) {
+		
+		QuestionVo vo = questionService.view(question_id);
+	    String nickname = (String)session.getAttribute("nickname");
+	    
+		//화면 보이기
 		model.addAttribute("view", vo);
 		
-		// 댓글 조회
-		List<AnswerVo> reply = null;
-		reply = answerService.list(question_id);
-		model.addAttribute("reply", reply);
+		//답글 조회
+		List<AnswerVo> answer = null;
+		answer = answerService.list(question_id);
+		model.addAttribute("answer", answer);
+		model.addAttribute("nickname", nickname);
 	}
 	
 	//질문 수정 폼
@@ -139,8 +163,6 @@ public class QuestionController {
 	 model.addAttribute("list", list);
 	 model.addAttribute("page", page);
 	 model.addAttribute("select", num);
-	 
-
 	}
 	
 }

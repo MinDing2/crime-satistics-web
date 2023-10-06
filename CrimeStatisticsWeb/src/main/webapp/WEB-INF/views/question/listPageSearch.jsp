@@ -42,8 +42,6 @@
 		</tbody>
 	</table>
 
-	<div>
-
 		<c:if test="${page.prev}">
 			<span>[ <a
 				href="/question/listPageSearch?num=${page.startPageNum - 1}${page.searchTypeKeyword}">이전</a>
@@ -58,7 +56,6 @@
 				</c:if> <c:if test="${select == num}">
 					<b>${num}</b>
 				</c:if>
-
 			</span>
 		</c:forEach>
 
@@ -68,11 +65,6 @@
 				]
 			</span>
 		</c:if>
-
-		<%-- <c:forEach begin="1" end="${pageNum}" var="num">
-			<span> <a href="/question/listPage?num=${num}">${num}</a>
-			</span>
-		</c:forEach>--%>
 
 		<div>
 			<select name="searchType">

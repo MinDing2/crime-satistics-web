@@ -8,6 +8,7 @@ public class AnswerVo {
 	private String answer_cont; 
 	private String answer_title; 
 	private Date create_date;
+	private String nickname;
 	
 	public AnswerVo() {}
 
@@ -20,6 +21,14 @@ public class AnswerVo {
 		this.answer_cont = answer_cont;
 		this.answer_title = answer_title;
 		this.create_date = create_date;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	@Override

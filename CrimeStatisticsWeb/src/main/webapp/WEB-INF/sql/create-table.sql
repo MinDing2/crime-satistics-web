@@ -105,3 +105,49 @@ alter table cart
 alter table cart
     add constraint cart_pdNum foreign key(pdNum)
     references products(pdNum);
+
+
+	-------------------------------------------------------
+
+CREATE TABLE answer(
+     answer_id NUMBER    PRIMARY KEY
+    ,question_id NUMBER REFERENCES QUESTION(question_id)
+    ,adminid VARCHAR2(50) REFERENCES ADMIN(adminid)
+    ,amswer_cont CLOB
+    ,create_date DATE    DEFAULT SYSDATE
+);
+
+CREATE TABLE question (
+     question_id NUMBER PRIMARY KEY,
+     memberid VARCHAR2(50) REFERENCES member(memberid),
+     question_title VARCHAR2(255) NOT NULL,
+     question_content CLOB,
+     create_date  DATE    DEFAULT SYSDATE
+);
+
+ALTER TABLE answer
+MODIFY answer_id NUMBER(10, 0) NOT NULL;
+
+
+
+-- "question_id"에 기본값 설정 (시퀀스를 사용하지 않음)
+CREATE OR REPLACE TRIGGER set_question_id_default
+BEFORE INSERT ON question
+FOR EACH ROW
+BEGIN
+  IF :NEW.question_id IS NULL THEN
+    SELECT COALESCE(MAX(question_id), 0) + 1 INTO :NEW.question_id FROM question;
+  END IF;
+END;
+
+-- 시퀀스 생성
+CREATE SEQUENCE answer_seq
+  START WITH 1
+  INCREMENT BY 1
+  NOMAXVALUE
+  NOCYCLE
+  NOCACHE;
+
+ALTER TABLE answer
+MODIFY answer_id NUMBER DEFAULT answer_seq.NEXTVAL;
+-------------------------------------------------------------------------

@@ -742,7 +742,7 @@ function loadGyeonggi() {
           document.getElementById("violentArrest").innerText = arrViolentSum;
           // 검거율
           document.getElementById("violentArrestRate").innerText = (arrViolentSum / occViolentSum * 100).toFixed(2) + "%";
-          
+       
           createChart();	
           arrChart();
       });
