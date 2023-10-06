@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Notice">
+
+	<!-- 공지글 등록 -->
+	<insert id="insertNotice">
+		INSERT INTO NOTICE(
+		NBNUM,
+		TITLE,
+		CONT,
+		WRITER,
+		ENDDATE
+		)VALUES(
+		(SELECT NVL(MAX(NBNUM), 0)+1 FROM NOTICE ),
+		#{title},
+		#{cont},
+		#{writer},
+		SYSDATE + #{enddate}
+		)
+	</insert>
+
+	<!-- 공지글 목록 -->
+	<select id="listNotice"
+		resultType="com.spring.notice.vo.NoticeVo">
+		SELECT NBNUM,TITLE,CONT,WRITER,TO_CHAR(REGDATE, '""YYYY"년 "MM"월 "DD"일"')
+		REGDATE,
+		READCOUNT, TO_CHAR(ENDDATE, '""YYYY"년 "MM"월 "DD"일"') AS ENDDATE
+		FROM (
+		SELECT NBNUM,TITLE,CONT,WRITER,REGDATE,READCOUNT,ENDDATE,ROW_NUMBER()
+		OVER(ORDER BY NBNUM) AS RNUM
+		FROM NOTICE
+		WHERE ENDDATE > SYSDATE
+		) NOTI
+		WHERE RNUM BETWEEN 1 AND 5
+		ORDER BY ENDDATE DESC
+	</select>
+
+	<!-- 공지사항내용 조회 -->
+	<select id="viewNotice"
+		resultType="com.spring.notice.vo.NoticeVo">
+		SELECT
+		NBNUM
+		,TITLE
+		,CONT
+		,WRITER
+		,TO_CHAR(REGDATE, '""YYYY"년 "MM"월 "DD"일"') REGDATE
+		,READCOUNT
+		,TO_CHAR(ENDDATE, '""YYYY"년 "MM"월 "DD"일"') AS ENDDATE
+		FROM NOTICE
+		WHERE NBNUM = #{nbnum}
+	</select>
+	<!-- 조회수 증가 -->
+	<update id="readCount">
+		UPDATE NOTICE
+		SET READCOUNT = READCOUNT + 1
+		WHERE NBNUM =
+		#{ nbnum }
+	</update>
+
+	<!-- 공지글 삭제 -->
+	<delete id="deleteNotice">
+	DELETE FROM NOTICE
+	WHERE NBNUM = #{nbnum}
+	</delete>
+	<!-- 공지글 수정 -->
+	<update id="updateNotice">
+
+		UPDATE NOTICE
+		SET TITLE = #{ title }
+		, CONT = #{ cont }
+		, ENDDATE = SYSDATE + #{enddate}
+		WHERE NBNUM = #{ nbnum }
+	</update>
+
+</mapper>

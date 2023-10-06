@@ -137,6 +137,9 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/board/listsearch?menu_id=1">자유게시판</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 지역 별 게시판
             </a>
