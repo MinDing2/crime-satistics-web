@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.board.domain.Criteria;
 import com.spring.board.domain.PageMaker;
 import com.spring.board.domain.ReplyVo;
 import com.spring.board.domain.SearchCriteria;
@@ -19,9 +18,10 @@ import com.spring.board.service.BoardService;
 import com.spring.board.service.LikeService;
 import com.spring.board.service.ReplyService;
 import com.spring.board.vo.BoardVo;
-import com.spring.member.service.MemberService;
 import com.spring.menu.service.MenuService;
 import com.spring.menu.vo.MenuVo;
+import com.spring.notice.service.NoticeService;
+import com.spring.notice.vo.NoticeVo;
 
 @Controller
 @RequestMapping("/board")
@@ -37,7 +37,7 @@ public class BoardController {
 	private ReplyService  replyService;
 	
 	@Autowired
-	private MemberService memberService;
+	private NoticeService noticeService;
 	
 	@Autowired
 	private LikeService likeService;
@@ -102,6 +102,7 @@ public class BoardController {
 		// 세션으로 닉네임 받아오기
 		String nickname = (String)session.getAttribute("nickname");
 		
+		// 내용 자동 줄바꿈
 		String        cont     =   boardVo.getCont().replace("\n", "<br>") ;
 		boardVo.setCont(cont);
 		
@@ -149,10 +150,10 @@ public class BoardController {
 
 	//게시물 목록 ( 검색 + 페이징 )
 	@GetMapping("/listsearch")
-	public ModelAndView listsearch(BoardVo vo, SearchCriteria scri) {
+	public ModelAndView listsearch(BoardVo vo, SearchCriteria scri,NoticeVo nvo) {
 		
 		// 메뉴목록
-		List<MenuVo> menuList = menuService.getMenuList();
+		//List<MenuVo> menuList = menuService.getMenuList();
 		
 		// 현재 메뉴이름
 		String  menuname  = menuService.getMenuName( vo.getMenu_id() );
@@ -160,6 +161,8 @@ public class BoardController {
 		// 게시물 목록
 		List<BoardVo> boardList = boardService.listSearch(scri);
 		
+		// 공지사항 목록
+		List<NoticeVo> noticeList = noticeService.noticelist(nvo);
 		// 페이지
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
@@ -170,7 +173,7 @@ public class BoardController {
 		mv.addObject("vo", vo);
 		mv.addObject("name", menuname);
 		mv.addObject("pageMaker",pageMaker);
-		mv.addObject("menuList", menuList);
+		mv.addObject("noticeList", noticeList);
 		mv.addObject("boardList", boardList);
 		mv.addObject("endpageCount", endpageCount);
 		mv.setViewName("board/listsearch");

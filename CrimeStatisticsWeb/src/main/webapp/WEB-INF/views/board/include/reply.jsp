@@ -19,8 +19,25 @@
         <!------------------------- 댓글 ---------------------------->
         <h3>댓글</h3>
         <button id="showCommentForm" class="btn btn-primary btn-sm">댓글 작성하기</button>
-        <div id="reply">
+        <!-- 댓글작성 -->
+        <div id="replydialog" style="display: none;">
+            <form method="post" action="/reply/write">
+                <div class="mb-3">
+                    <label for="writer" class="form-label">댓글 작성자</label>
+                    <input type="text" class="form-control" id="writer" name="writer" value="${nickname}" readonly required>
+                </div>
+                <div class="mb-3">
+                    <label for="cont" class="form-label">댓글 내용</label>
+                    <textarea class="form-control" id="cont" name="cont" rows="4" required></textarea>
+                </div>
+                <input type="hidden" name="bnum" value="${vo.bnum}">                
+                <div class="mb-3">
+                    <button id= "replywrite"type="submit" class="btn btn-primary">댓글 작성</button>
+                </div>
+            </form>
+        </div>         
         <!-- 댓글 목록 -->
+        <div id="reply">
             <ol class="replyList list-unstyled">
                 <c:forEach items="${replyList}" var="reply">
                     <li class="mb-4">
@@ -40,23 +57,6 @@
                 </c:forEach>
             </ol>
         </div>
-        <!-- 댓글작성 -->
-        <div id="replydialog" style="display: none;">
-            <form method="post" action="/reply/write">
-                <div class="mb-3">
-                    <label for="writer" class="form-label">댓글 작성자</label>
-                    <input type="text" class="form-control" id="writer" name="writer" value="${nickname}" readonly required>
-                </div>
-                <div class="mb-3">
-                    <label for="cont" class="form-label">댓글 내용</label>
-                    <textarea class="form-control" id="cont" name="cont" rows="4" required></textarea>
-                </div>
-                <input type="hidden" name="bnum" value="${vo.bnum}">                
-                <div class="mb-3">
-                    <button id= "replywrite"type="submit" class="btn btn-primary">댓글 작성</button>
-                </div>
-            </form>
-        </div>         
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
