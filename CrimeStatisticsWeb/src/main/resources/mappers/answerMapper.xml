@@ -24,7 +24,7 @@ select
 <!--관리자 답글 작성-->
 <insert id="writeAnswer" parameterType="com.spring.answer.vo.AnswerVo">
 	insert into answer( question_id, adminid, answer_cont)
-		values( #{question_id},  #{adminid}, #{answer_cont})
+		values( #{ question_id },  #{ adminid }, #{ answer_cont })
 </insert>
 
 

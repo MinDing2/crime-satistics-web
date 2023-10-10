@@ -1,7 +1,10 @@
 package com.spring.answer.controller;
 
-import javax.inject.Inject;
+import java.net.http.HttpRequest;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +29,7 @@ public class AnswerController {
 	private AnswerService answerService;
 	
 	
-	// ëŒ“ê¸€ ë‹¨ì¼ ì¡°íšŒ (ìˆ˜ì • í˜ì´ì§€)
+	// ¼öÁ¤
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void getMofidy(@RequestParam("question_id") int question_id, @RequestParam("answer_id") int answer_id, Model model) throws Exception {
 		
@@ -39,17 +42,28 @@ public class AnswerController {
 		model.addAttribute("answer", answer);
 	}
 	
-	//ëŒ“ê¸€ ì‘ì„±
+	//
 	@PostMapping("/writewAnswer")
-	public String postWrite(AnswerVo vo) {
+	public String postWrite(AnswerVo vo, HttpSession session,HttpServletRequest request) {
 		
-		System.out.println(vo);
+		String loggedInAdminId = (String) session.getAttribute("adminid");
+		
+		if(loggedInAdminId == null) {
+			    //adminid°¡ ·Î±×ÀÎµÇÁö ¾ÊÀº °æ¿ì, JavaScript alert ¸Ş½ÃÁö¸¦ Ãâ·ÂÇÏ°í ÀÌÀü ÆäÀÌÁö·Î µÇµ¹¾Æ°¡±â
+		        request.setAttribute("msg", "°ü¸®±ÇÇÑÀÌ ÇÊ¿äÇÕ´Ï´Ù.");
+		        request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
+		        return "question/alert";
+		}
+		vo.setAdminid(loggedInAdminId);
+		
+		//System.out.println(vo);
+	
 		answerService.write(vo);
 		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 	}
 	
 	
-	// ëŒ“ê¸€ ìˆ˜ì •
+	//
 //	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 //	public String postModify(AnswerVo vo) throws Exception {
 //
@@ -59,7 +73,7 @@ public class AnswerController {
 //	}
 	
 
-	//ë‹µê¸€ ì‚­ì œ
+	//
 		@GetMapping("/delete")
 		public String getDelete(AnswerVo vo) {
 			answerService.delete(vo);
