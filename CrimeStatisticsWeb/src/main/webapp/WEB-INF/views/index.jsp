@@ -53,6 +53,7 @@
     align-items: center;
     height: 200vh; /* 원하는 높이로 조정하세요 */
   }
+  
   #menu{font-size:30px; text-align: left;}
   #board{font-size:30px; text-align: left;}
 </style>
@@ -72,7 +73,6 @@
     
     <!-- 오른쪽 열: 표 -->
     <div class="col-md-6">
-   
     	<div class = "table-container">
       <table class="table table-bordered">
     <thead>

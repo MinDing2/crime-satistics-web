@@ -48,14 +48,15 @@ public class AnswerController {
 		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 	}
 	
+	
 	// 댓글 수정
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String postModify(AnswerVo vo) throws Exception {
-
-		answerService.modify(vo);
-
-		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
-	}
+//	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+//	public String postModify(AnswerVo vo) throws Exception {
+//
+//		answerService.modify(vo);
+//
+//		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
+//	}
 	
 
 	//답글 삭제
