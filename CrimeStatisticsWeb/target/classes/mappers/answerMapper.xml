@@ -28,6 +28,32 @@ select
 </insert>
 
 
+<!-- 단일 댓글 조회 -->
+<select id="answerSelect" parameterType="com.spring.answer.vo.AnswerVo" resultType="com.spring.answer.vo.AnswerVo">
+	select 
+    answer_id,
+    question_id,
+    nickname,
+    answer_cont,
+    create_date
+from answer a
+    INNER JOIN admin b  ON a.adminid = b.adminid
+    where question_id = #{question_id}
+    and answer_id     = #{answer_id}				
+</select>
 
+<!--  댓글 삭제 -->
+<delete id = "answerDelete"  parameterType="com.spring.answer.vo.AnswerVo">
+	delete from answer
+	where   answer_id   = #{answer_id}
+</delete>
+
+<!-- 댓글 수정 -->
+	<update id="answerModify" parameterType="com.spring.answer.vo.AnswerVo">
+		update answer set
+			answer_cont     = #{answer_cont}
+		where answer_id     = #{answer_id}
+			and question_id = #{question_id}	
+	</update>
 
 </mapper>

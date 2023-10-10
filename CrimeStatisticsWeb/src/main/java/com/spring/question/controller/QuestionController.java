@@ -44,6 +44,7 @@ public class QuestionController {
 		model.addAttribute("list", list); 
 		return "question/list";
 	 }
+	
 	//질문 작성 폼
 	@GetMapping("/writeform")
 	public String getWrite(Model model, HttpSession session) {
@@ -55,6 +56,7 @@ public class QuestionController {
 		model.addAttribute("nickname", findMember.getNickname());
 		return "question/write";
 	}
+	
 	//질문 작성 
 	@PostMapping("/write")
 	public String postwrite(QuestionVo vo, HttpSession session) {
@@ -68,14 +70,14 @@ public class QuestionController {
 	
 	//답글 작성 (관리자)
 	@PostMapping("/writeAnswer")
-	public String postwriteAnswer(QuestionVo vo, HttpSession session) {
+	public String postwriteAnswer(AnswerVo vo, HttpSession session) {
 		
 		//adminid 값 받아서 nickname값 가져오기 
 		String adminid = (String)session.getAttribute("adminid");
-		vo.setMemberid(adminid);
+		vo.setAdminid(adminid);
 		
-		//기다려 만들거야 
-		//answerService.insertQuestion(vo);
+		//작성
+		answerService.write(vo);
 		
 		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 	}

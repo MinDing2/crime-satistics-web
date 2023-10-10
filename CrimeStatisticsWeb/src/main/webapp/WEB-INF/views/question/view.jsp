@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +33,16 @@
 	<%//테스트 %>
 	<c:forEach items="${answer}" var="answer">
 	<li>
+		<hr>
 		<div>
-			<p>${answer.question_id }</p>
-			<p>${answer.nickname} / ${answer.create_date}</p>
+			<p>${answer.question_id }번 게시물</p>
+			<p>${answer.nickname} / <fmt:formatDate value="${answer.create_date}" pattern="yyyy-MM-dd" /></p>
 			<p>${answer.answer_cont }</p>
+		
+			<p>
+				<a href="/answer/modify?question_id=${answer.question_id}&answer_id=${answer.answer_id}">수정</a> / <a href="/answer/delete?answer_id=${ answer.answer_id }&question_id=${answer.question_id}">삭제</a>
+			</p>
+			<hr>
 		</div>
 	</li>	
 	</c:forEach>
@@ -44,7 +51,7 @@
 	<form method="post" action="/answer/writewAnswer">
 	
 		<p>
-	<br>		<hr>
+		<br>
 			${nickname}
 		</p>
 			
@@ -52,11 +59,13 @@
 			<textarea rows="5" cols="50" name ="answer_cont"></textarea>
 		</p>
 		
-		<p>
-			<input type = "hidden" name="adminid"     value="${adminid}"  readonly/>
-			<input type = "hidden" name="question_id" value="${view.question_id}"  readonly/>
+		<p>	
+			<input type = "hidden" name ="adminid"       value="${adminid}"  readonly/>
+			<input type = "hidden" name ="question_id"   value="${view.question_id}" />
 			<button type = "submit">댓글 작성 </button>
-		</p>	
+		</p>
+		
+			
 	</form>	
 		
 </body>

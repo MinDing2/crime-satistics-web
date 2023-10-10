@@ -2,7 +2,7 @@ package com.spring.answer.vo;
 import java.util.Date;
 
 public class AnswerVo {
-	private String answer_id; 
+	private int answer_id; 
 	private int question_id;
 	private String adminid; 
 	private String answer_cont; 
@@ -12,7 +12,7 @@ public class AnswerVo {
 	
 	public AnswerVo() {}
 
-	public AnswerVo(String answer_id, int question_id, String adminid, String answer_cont, String answer_title,
+	public AnswerVo(int answer_id, int question_id, String adminid, String answer_cont, String answer_title,
 			Date create_date) {
 		super();
 		this.answer_id = answer_id;
@@ -46,10 +46,10 @@ public class AnswerVo {
 		this.answer_title = answer_title;
 	}
 
-	public String getAnswer_id() {
+	public int getAnswer_id() {
 		return answer_id;
 	}
-	public void setAnswer_id(String answer_id) {
+	public void setAnswer_id(int answer_id) {
 		this.answer_id = answer_id;
 	}
 	public int getQuestion_id() {

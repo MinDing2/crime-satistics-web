@@ -28,6 +28,24 @@ public class AnswerDaoImpl implements AnswerDao {
 	public void write(AnswerVo vo) {
 		sql.insert(namespace + ".writeAnswer", vo);
 	}
+	//단일 댓글 조회 
+	@Override
+	public AnswerVo answerSelect(AnswerVo vo) {
+		return sql.selectOne(namespace + ".answerSelect", vo);
+	}
+
+	//댓글 수정
+	@Override
+	public void modify(AnswerVo vo) {
+		sql.update(namespace + ".answerModify", vo); 
+	}
+
+	//댓글 삭제
+	@Override
+	public void delete(AnswerVo vo) {
+		sql.delete(namespace + ".answerDelete", vo);		
+	}
 	
+
 	
 }

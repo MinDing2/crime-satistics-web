@@ -113,7 +113,7 @@ CREATE TABLE answer(
      answer_id NUMBER    PRIMARY KEY
     ,question_id NUMBER REFERENCES QUESTION(question_id)
     ,adminid VARCHAR2(50) REFERENCES ADMIN(adminid)
-    ,amswer_cont CLOB
+    ,answer_cont CLOB
     ,create_date DATE    DEFAULT SYSDATE
 );
 
