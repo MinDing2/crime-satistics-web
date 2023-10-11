@@ -28,25 +28,12 @@ public class AnswerController {
 	@Autowired
 	private AnswerService answerService;
 	
-	
-	// 수정
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public void getMofidy(@RequestParam("question_id") int question_id, @RequestParam("answer_id") int answer_id, Model model) throws Exception {
-		
-		AnswerVo vo = new AnswerVo();
-		vo.setQuestion_id(question_id);
-		vo.setAnswer_id(answer_id);
-		
-		AnswerVo answer = answerService.answerSelect(vo);
-			 
-		model.addAttribute("answer", answer);
-	}
-	
-	//
 	@PostMapping("/writewAnswer")
 	public String postWrite(AnswerVo vo, HttpSession session,HttpServletRequest request) {
 		
 		String loggedInAdminId = (String) session.getAttribute("adminid");
+
+		
 		
 		if(loggedInAdminId == null) {
 			    //adminid가 로그인되지 않은 경우, JavaScript alert 메시지를 출력하고 이전 페이지로 되돌아가기
@@ -54,10 +41,13 @@ public class AnswerController {
 		        request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
 		        return "question/alert";
 		}
-		vo.setAdminid(loggedInAdminId);
 		
+		
+		vo.setAdminid(loggedInAdminId);
 		//System.out.println(vo);
 	
+		
+		
 		answerService.write(vo);
 		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 	}

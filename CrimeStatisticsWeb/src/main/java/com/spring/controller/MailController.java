@@ -29,14 +29,14 @@ public class MailController {
 		int num = r.nextInt(888888) + 11111;
 		
 		String setFrom = "kimm9803@gmail.com";
-		String toMail = email;	// 받는 사람 이메일
-		String title = "회원가입 인증 코드";
+		String toMail = email;	// 
+		String title = "�쉶�썝媛��엯 �씤利� 肄붾뱶";
 		String content = 
-				"Crime Statistics 홈페이지를 방문해주셔서 감사합니다." +
+				"Crime Statistics �솃�럹�씠吏�瑜� 諛⑸Ц�빐二쇱뀛�꽌 媛먯궗�빀�땲�떎." +
 		        "<br><br>" + 
-		        "인증 번호는 " + num + "입니다." + 
+		        "�씤利� 踰덊샇�뒗 " + num + "�엯�땲�떎." + 
 		        "<br>" + 
-		        "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+		        "�빐�떦 �씤利앸쾲�샇瑜� �씤利앸쾲�샇 �솗�씤���뿉 湲곗엯�븯�뿬 二쇱꽭�슂.";
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
@@ -59,14 +59,14 @@ public class MailController {
 		String memberid = memberService.findIdWithEmail(email);
 		
 		String setFrom = "kimm9803@gmail.com";
-		String toMail = email;	// 받는 사람 이메일
-		String title = "아이디 찾기";
+		String toMail = email;	// 諛쏅뒗 �궗�엺 �씠硫붿씪
+		String title = "�븘�씠�뵒 李얘린";
 		String content = 
-				"Crime Statistics 홈페이지를 방문해주셔서 감사합니다." +
+				"Crime Statistics �솃�럹�씠吏�瑜� 諛⑸Ц�빐二쇱뀛�꽌 媛먯궗�빀�땲�떎." +
 		        "<br><br>" + 
-		        "회원님의 아이디는 " + memberid + "입니다." + 
+		        "�쉶�썝�떂�쓽 �븘�씠�뵒�뒗 " + memberid + "�엯�땲�떎." + 
 		        "<br>" + 
-		        "해당 아이디로 로그인을 해주십시오.";
+		        "�빐�떦 �븘�씠�뵒濡� 濡쒓렇�씤�쓣 �빐二쇱떗�떆�삤.";
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");

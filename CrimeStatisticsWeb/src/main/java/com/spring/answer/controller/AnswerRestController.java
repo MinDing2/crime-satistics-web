@@ -1,8 +1,12 @@
 package com.spring.answer.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,17 +25,32 @@ public class AnswerRestController {
 	private AnswerService answerService;
 	
 	@PostMapping("/modify")
-	public String postModify(@RequestParam("answer_id") int answer_id,
+	public  ResponseEntity<String> postModify(@RequestParam("answer_id") int answer_id,
 							 @RequestParam("answer_cont") String answer_cont,
-							 @RequestParam("question_id") int question_id) throws Exception {
-	    // answerService.modify ë©”ì„œë“œë¥¼ í˜¸ì¶œí•˜ì—¬ ìˆ˜ì • ë¡œì§ ìˆ˜í–‰
-		AnswerVo answerVo = new AnswerVo();
-		answerVo.setAnswer_id(answer_id);
-		answerVo.setAnswer_cont(answer_cont);
-		answerVo.setQuestion_id(question_id);
-	    answerService.modify(answerVo);
-	    
-	    return "response";
+							 @RequestParam("question_id") int question_id,
+							 HttpSession session
+							) throws Exception {
+
+		 // ¼¼¼Ç¿¡¼­ ·Î±×ÀÎÇÑ °ü¸®ÀÚ ID¸¦ °¡Á®¿É´Ï´Ù. ÀÌ°ÍÀº °ü¸®ÀÚ·Î ·Î±×ÀÎµÈ °æ¿ì¿¡¸¸ °ªÀÌ Á¸ÀçÇÕ´Ï´Ù.
+	    String adminId = (String) session.getAttribute("adminid");
+
+	    if (adminId != null) {
+	        // °ü¸®ÀÚ·Î ·Î±×ÀÎµÇ¾î ÀÖÀ» °æ¿ì¿¡¸¸ ¼öÁ¤À» Çã¿ëÇÕ´Ï´Ù.
+	        AnswerVo answerVo = new AnswerVo();
+
+	        answerVo.setAnswer_id(answer_id);
+	        answerVo.setAnswer_cont(answer_cont);
+	        answerVo.setQuestion_id(question_id);
+
+	        answerService.modify(answerVo);
+
+	        // ¼öÁ¤ÀÌ ¼º°øÇßÀ» ¶§, ¼º°ø ÀÀ´äÀ» ¹İÈ¯ÇÕ´Ï´Ù.
+	        return new ResponseEntity<>("Answer modified successfully", HttpStatus.OK);
+	    } else {
+	        // °ü¸®ÀÚ·Î ·Î±×ÀÎµÇÁö ¾ÊÀº °æ¿ì¿¡´Â ¼öÁ¤À» °ÅºÎÇÏ°í ±ÇÇÑ ¾øÀ½ ÀÀ´äÀ» ¹İÈ¯ÇÕ´Ï´Ù.
+	        return new ResponseEntity<>("Access denied. You must be logged in as an admin to modify answers.", HttpStatus.FORBIDDEN);
+	    }
+
 	}	
 
 }

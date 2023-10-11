@@ -19,19 +19,19 @@ public class AdminDaoImpl implements AdminDao {
 	
 	private final String namespace = "Admin";
 	
-	// 관리자 로그인
+	// 
 	@Override
 	public AdminVo login(AdminVo adminVo) {
 		return sqlSession.selectOne(namespace + ".login", adminVo);
 	}
 
-	// 카테고리
+	//
 	@Override
 	public List<CategoryVo> category() {
 		return sqlSession.selectList(namespace + ".category");
 	}
 
-	// 상품등록
+	// 
 	@Override
 	public void register(ProductVo productVo) {
 		sqlSession.insert(namespace + ".register", productVo);

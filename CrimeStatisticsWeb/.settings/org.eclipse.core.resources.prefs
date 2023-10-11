@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/spring/admin/interceptor/AdminInterceptor.java=UTF-8
+encoding//src/main/java/com/spring/controller/MailController.java=UTF-8
+encoding//src/main/java/com/spring/member/controller/MemberController.java=UTF-8
+encoding//src/main/java/com/spring/member/controller/MemberRestController.java=UTF-8

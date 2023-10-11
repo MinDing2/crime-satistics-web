@@ -30,13 +30,13 @@ public class AdminController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
-	// 관리자 로그인 페이지
+	//
 	@GetMapping("/login-page")
 	public String adminLoginForm() {
 		return "admin/login";
 	}
 	
-	// 관리자 로그인
+	// 
 	@PostMapping("/login")
 	public String adminLogin(HttpSession session, AdminVo adminVo) {
 		AdminVo findAdmin = adminService.login(adminVo);
@@ -46,20 +46,20 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
-	// 관리자 로그아웃
+	// 
 	@GetMapping("/logout")
 	public String adminLogout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
 	
-	// 관리자 페이지
+	//
 	@GetMapping("/page")
 	public String adminPage() {
 		return "admin/page";
 	}
 	
-	// 상품 등록 페이지
+	// 
 	@GetMapping("/products/register")
 	public String productsRegisterForm(Model model) {
 		List<CategoryVo> category = adminService.category();
@@ -67,7 +67,7 @@ public class AdminController {
 		return "admin/products/register";
 	}
 	
-	// 상품 등록
+	//
 	@PostMapping("/products/register")
 	public String productsRegister(ProductVo productVo, MultipartFile file) throws Exception {
 		String imgUploadPath = uploadPath;

@@ -58,13 +58,13 @@ public class MemberController {
 	
 	
 
-	// 회원가입 페이지
+	// 
 	@GetMapping("/signup-page")
 	public String signupForm() {
 		return "member/signup";
 	}
 	
-	// 회원가입
+	// 
 	@PostMapping("/signup")
 	public String signup(MemberVo memberVo) {
 		memberVo.setAddress(memberVo.getAddress_primary() + " " + memberVo.getAddress_detail());
@@ -73,48 +73,48 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	// 로그인 페이지
+	//
 	@GetMapping("/login-page")
 	public String memberLoginFrom(Model model, HttpSession session) {
-		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		/*  */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		
-		/* 구글code 발행 */
+		/*  */
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
 
 		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=6m11DUsaOAlewAFPEIgU&
 		// redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fmember%2Fnaver-login%2Fcallback&state=1f5213be-a0af-490f-b4fd-73ac54758bd3
-		System.out.println("네이버:" + naverAuthUrl);
-		System.out.println("구글:" + url);
+		System.out.println(":" + naverAuthUrl);
+		System.out.println("" + url);
 
 
-		// 네이버 
+		// 
 		model.addAttribute("url", naverAuthUrl);
-		// 구글
+		// 
 		model.addAttribute("google_url", url);
 
 		return "member/login";
 	}
 	
-	//네이버 로그인 성공시 callback호출 메소드
+	//
 	@GetMapping("/naver-login/callback")
 	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException, ParseException {
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state); 
-	    // 로그인 사용자 정보를 읽어온다.
+	    // 
 		apiResult = naverLoginBO.getUserProfile(oauthToken);
 		//session.setAttribute("naver", apiResult);
 		
-		// String 형식인 apiResult를 json 형태로 바꿈
+		// 
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
 		System.out.println("obj : " + obj);
 		JSONObject jsonObj = (JSONObject) obj;
 		
-		// 데이터 파싱
+		// 
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
-		String access_token = oauthToken.getAccessToken(); //토큰
+		String access_token = oauthToken.getAccessToken(); //
 		
 		String id = (String) response_obj.get("id");
 		String name = (String) response_obj.get("name");
@@ -124,19 +124,19 @@ public class MemberController {
 		
 		session.setAttribute("naverid", id);
 		
-	    /* 네이버 로그인 성공 페이지 View 호출 */
+	    /*  */
 		return "redirect:/";
 	}
 	
-	// 네이버 로그아웃
+	// �꽕�씠踰� 濡쒓렇�븘�썐
 	@GetMapping("/naver-logout")
     public String naverLogout(HttpSession session) throws IOException {
 		
-        session.invalidate(); // 로컬 세션 무효화
-        return "redirect:/"; // 로그아웃 후 리다이렉트할 URL
+        session.invalidate(); // 
+        return "redirect:/"; // 
     }
 
-	// 구글 Callback호출 메소드
+	// 
 	@GetMapping("/google-login/callback")
 	public String googleCallback(Model model, @RequestParam String code, HttpSession session) throws IOException {
 		 OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
@@ -145,7 +145,7 @@ public class MemberController {
 		    String accessToken = accessGrant.getAccessToken();
 		    String refreshToken = accessGrant.getRefreshToken();
 
-		    // Access Token을 이용하여 사용자 정보를 요청
+		    // Access Toke
 		    OAuth2Parameters parameters = new OAuth2Parameters();
 		    RestTemplate restTemplate = new RestTemplate();
 		    HttpHeaders headers = new HttpHeaders();
@@ -161,9 +161,7 @@ public class MemberController {
 
 		    String userInfo = result.getBody();
 
-		    // userInfo를 원하는 형태로 파싱하여 필요한 정보를 추출하고 세션에 저장
-		    // 예를 들어, JSON 파싱 라이브러리를 사용하여 userInfo를 파싱할 수 있습니다.
-		    // 여기서는 예시로 Google의 사용자 ID를 가져오는 것으로 가정합니다.
+		    // 
 		    ObjectMapper objectMapper = new ObjectMapper();
 		    JsonNode node = objectMapper.readTree(userInfo);
 		    String googleid = node.get("id").asText();
@@ -173,7 +171,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	// 구글 로그아웃
+	// 
 	@GetMapping("/google-logout")
 	public String googleLogout(HttpSession session) {
 		session.invalidate();
@@ -181,7 +179,7 @@ public class MemberController {
 	}
 
 
-	// 폼 로그인 성공
+	//
 	@PostMapping("/login")
 	public String memberLogin(MemberVo memberVo, HttpSession session, Model model) {
 		
@@ -191,14 +189,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	// 로그아웃
+	// 
 	@GetMapping("/logout")
 	public String memberLogout(HttpSession session) {
 		memberService.logout(session);
 		return "redirect:/";
 	}
 	
-	// 마이페이지
+	// 
 	@GetMapping("/mypage")
 	public String myPage(HttpSession session, Model model) {
 		String memberid = (String)session.getAttribute("memberid");
@@ -207,7 +205,7 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
-	// 회원 수정
+	// ds
 	@PostMapping("/modify")
 	public String memberModify(MemberVo memberVo, @RequestParam("newPasswd") String newPasswd) {
 		memberVo.setPasswd(newPasswd);
@@ -217,7 +215,7 @@ public class MemberController {
 		return "redirect:/member/mypage";
 	}
 	
-	// 회원 탈퇴
+	// 
 	@PostMapping("/delete")
 	public String memberDelete(HttpSession session) {
 		String memberid = (String)session.getAttribute("memberid");
