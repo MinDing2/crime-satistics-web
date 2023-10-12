@@ -14,7 +14,7 @@
     .footer-custom {
       background-color: #003a5e;
       color: white;
-      padding: 10px;
+      padding: 0px;
       text-align: center;
     }
   </style>

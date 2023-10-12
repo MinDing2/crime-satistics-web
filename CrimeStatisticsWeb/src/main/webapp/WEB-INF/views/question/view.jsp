@@ -10,14 +10,41 @@
     <title>게시물 조회</title>
     <!-- Add Bootstrap CSS link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
     <!-- Add Bootstrap JS scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+    
+            .question-section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .answer-section {
+            background-color: #e6f7ff;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #b3e0ff;
+        }
+
+        .answer-content {
+            margin-bottom: 10px;
+        }   
+    
+    </style>
 </head>
 <body>
-    <!-- 질문 글 표시 -->
-    <div class="container mt-4">
-        <h2>Q&A</h2>
+	<header><%@ include file="../template/header.jsp"%></header>
+	
+    <!-- 질문 글 표시 -->	
+    <h2 style="padding: 10px; border-radius: 5px;">질문</h2>
+    <div class="container mt-4 question-section">
+        
+        <!--  
         <div class="mb-3">
             <label class="form-label">제목</label>
             <p>${view.question_title}</p>
@@ -34,13 +61,39 @@
             <label class="form-label">날짜</label>
             <p>${view.create_date}</p>
         </div>
-        <div class="mb-3">
+         -->
+		
+	
+		
+		<!-- 백그라운드 컬러 추가 및 스타일 변경 -->
+	
+		<div class="mb-3">
+			<p class="fw-bold fs-5">제목: ${view.question_title}</p>
+			<hr>
+			<div class="d-flex justify-content-between">
+				<!-- 닉네임과 날짜 간격 조절 -->
+				<p class="fw-normal fs-7" style = "font-size:13px; margin: 0;">닉네임: ${view.nickname}</p>
+				<p class="fw-normal fs-7" style = "font-size:13px; margin: 0;">날짜: ${view.create_date}</p>
+				
+			</div>
+			<hr>
+		</div>
+		<div class="mb-3">
+			<p class="fw-normal fs-5">내용: ${view.question_content}</p>
+		</div>
+		<hr>
+		<!-- 섹션 간에 선 추가 -->
+
+
+		<div class="mb-3">
             <a class="btn btn-primary" href="/question/modify?question_id=${view.question_id}">게시물 수정</a>
             <a class="btn btn-danger" href="/question/delete?question_id=${view.question_id}">게시물 삭제</a>
         </div>
-
+		
         <!-- 답변 작성한 거 표시 -->
+      
         <c:forEach items="${answer}" var="answer">
+         <div class="container mt-4 answer-section">
             <hr>
             <div class="mb-3">
                 <p>${answer.question_id}번게시물</p>
@@ -56,18 +109,21 @@
                   	   <p id="answer_cont_" ${answer.answer_id}" data-answer-id="${answer.answer_id}" contenteditable="false">${answer.answer_cont}</p>  
                   		 <div id="answer_cont_" data-answer-id="${answer.answer_id}" contenteditable="false">${answer.answer_cont}</div>
                       -->
-                  	<span id="answer_cont_"  contenteditable="false">${answer.answer_cont}</span> 
+                  	 <span id="answer_cont_"  contenteditable="false">${answer.answer_cont}</span> 
    					  
-   					
+   				<!-- 	-->
+   					 <br>
    					 <button type="button" class="btn btn-primary editBtn"    data-answer-id="${answer.answer_id}" >수정</button>
                      <button type="button" class="btn btn-success confirmBtn" data-answer-id="${answer.answer_id}" style="display: none;">확인</button>
-                     <button type="button" class="btn btn-danger cancelBtn"   data-answer-id="${answer.answer_id}" style="display: none;">취소</button>
-                </div>
-
-                <p>
+                      <a type="button" class="btn btn-danger" href="/answer/delete?answer_id=${answer.answer_id}&question_id=${answer.question_id}">삭제</a>
+   
+                <!-- <button type="button" class="btn btn-danger cancelBtn"   data-answer-id="${answer.answer_id}" style="display: none;">취소</button> -->
+               </div>
+                <!-- 삭제
                     <a type="button" class="btn btn-danger" href="/answer/delete?answer_id=${answer.answer_id}&question_id=${answer.question_id}">삭제</a>
-                </p>
+                 -->
             </div>
+       </div>
         </c:forEach>
 
         <!-- 답변 폼 -->
@@ -96,7 +152,8 @@ $(document).ready(function() {
         
         // "수정" 버튼 토글
         editBtn.toggle();
-        editBtn.siblings(".confirmBtn, .cancelBtn").toggle();
+        editBtn.siblings(".confirmBtn").toggle();
+        //.cancelBtn
     });
     
     // "확인" 버튼 클릭 시

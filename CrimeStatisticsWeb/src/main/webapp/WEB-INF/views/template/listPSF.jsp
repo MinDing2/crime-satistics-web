@@ -34,18 +34,20 @@
 	justify-content: center;
 }
 /* footer 스타일 */
-footer {
+.footer-custom {
 	background-color: #003a5e; /* 원하는 색상으로 변경 가능 */
 	color: white;
-	padding: 10px;
+	padding: 0;
 	position: absolute;
 	width: 100%;
 	bottom: 0;
+	
+	      
 }
 </style>
 </head>
 <body>
-	<footer class="text-center text-white fixed-bottom footer-custom">
+	<footer class="text-center text-white bottom footer-custom">
 		<div class="text-center mb-3 mt-3">© Crime Statistics Web. All
 			rights reserved.</div>
 	</footer>

@@ -35,7 +35,7 @@
 
 <body>
 		<header><%@ include file="../template/listPSH.jsp"%></header>
-	
+		
     <div class="container mt-4">
         <h2>Q&A 게시판</h2>
         <table class="table table-striped">
