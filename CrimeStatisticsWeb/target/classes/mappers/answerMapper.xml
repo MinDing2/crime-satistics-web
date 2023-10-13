@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Answer" >
+
+
+<!--관리자 답글 조회-->
+<select id = "listAnswer" resultType = "com.spring.answer.vo.AnswerVo"  parameterType= "int" >
+select 
+     answer_id
+    ,question_id
+    ,b.nickname
+    ,answer_cont
+    ,create_date		 
+	from answer a
+	inner Join admin b ON a.adminid = b.adminid
+    where 
+        question_id = #{ quesiton_id }
+</select>
+
+
+<!--관리자 답글 작성-->
+<insert id="writeAnswer" parameterType="com.spring.answer.vo.AnswerVo">
+	insert into answer( question_id, adminid, answer_cont)
+		values( #{ question_id },  #{ adminid }, #{ answer_cont })
+</insert>
+
+
+<!-- 단일 댓글 조회 -->
+<select id="answerSelect" parameterType="com.spring.answer.vo.AnswerVo" resultType="com.spring.answer.vo.AnswerVo">
+	select 
+    answer_id,
+    question_id,
+    nickname,
+    answer_cont,
+    create_date
+from answer a
+    INNER JOIN admin b  ON a.adminid = b.adminid
+    where question_id = #{question_id}
+    and answer_id     = #{answer_id}				
+</select>
+
+<!--  댓글 삭제 -->
+<delete id = "answerDelete"  parameterType="com.spring.answer.vo.AnswerVo">
+	delete from answer
+	where   answer_id   = #{answer_id}
+</delete>
+
+<!-- 댓글 수정 -->
+	<update id="answerModify" parameterType="com.spring.answer.vo.AnswerVo">
+		update answer set
+			answer_cont     = #{answer_cont}
+		where answer_id     = #{answer_id}
+			and question_id = #{question_id}	
+	</update>
+
+</mapper>

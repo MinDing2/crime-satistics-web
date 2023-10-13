@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Shop">
+
+	<!-- 전체 호신용품 리스트 -->
+	<select id="allPdList" resultType="com.spring.shop.vo.ProductVo">
+		SELECT pdNum, pdName, cateCode, pdPrice, pdStock, pdDes, pdImg, pdDate, pdThumbImg
+		FROM products
+		ORDER BY pdNum DESC
+	</select>
+	
+	<!-- 카테고리별 호신용품 리스트 -->
+	<select id="catePdList" resultType="com.spring.shop.vo.ProductVo">
+		SELECT p.pdNum, p.pdName, p.cateCode, p.pdPrice, p.pdStock, p.pdDes, p.pdImg, p.pdDate, p.pdThumbImg
+		FROM products p
+		INNER JOIN products_category c ON p.cateCode = c.cateCode
+		WHERE p.cateCode = #{cateCode}
+		ORDER BY p.pdNum DESC
+	</select>
+	
+	<!-- 상품 상세조회 -->
+	<select id="getView" resultType="com.spring.shop.vo.ProductVo">
+		SELECT pdNum, pdName, cateCode, pdPrice, pdStock, pdDes, pdImg, pdDate, pdThumbImg 
+		FROM products
+		WHERE pdNum = #{pdNum}
+	</select>
+	
+	<!-- 장바구니 담기 -->
+	<insert id="addCart">
+		INSERT INTO cart(cartNum, memberid, pdNum, cartStock)
+		VALUES (cart_seq.nextVal, #{memberid}, #{pdNum}, #{cartStock})
+	</insert>
+	
+	<!-- 장바구니 리스트 -->
+	<select id="getCartList" resultType="com.spring.shop.vo.CartVo">
+		SELECT c.cartNum, c.memberid, c.pdNum, c.cartStock, c.addDate, p.pdPrice * c.cartStock AS totalPrice,
+			   p.pdName, p.pdPrice, p.pdDate, p.pdThumbImg
+		FROM cart c
+		INNER JOIN products p ON c.pdNum = p.pdNum
+		WHERE c.memberid = #{memberid}
+		ORDER BY c.cartNum DESC
+	</select>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCart" parameterType="hashMap">
+		DELETE FROM cart
+		WHERE memberid = #{memberid} AND cartNum = #{cartNum}
+	</delete>
+	
+	<!-- 장바구니 결제가격 계산 -->
+	<select id="calcPayment" parameterType="hashMap" resultType="int">
+		SELECT p.pdPrice * c.cartStock
+		FROM cart c
+		INNER JOIN products p ON c.pdNum = p.pdNum
+		WHERE c.memberid = #{memberid} AND c.cartNum = #{cartNum}
+	</select>
+	
+	<!-- 장바구니 전체 결제가격 계산 -->
+	<select id="calcTotalPayment" resultType="int">
+		SELECT SUM(p.pdPrice * c.cartStock)
+		FROM cart c
+		INNER JOIN products p ON c.pdNum = p.pdNum
+		WHERE c.memberid = #{memberid}
+	</select>
+	
+	<!-- (장바구니) 단일 상품 구매시 물품 및 가격 정보 -->
+	<select id="getCartOne" parameterType="hashMap" resultType="com.spring.shop.vo.CartVo">
+		SELECT c.cartNum, c.memberid, c.pdNum, c.cartStock, p.pdName, p.pdPrice, p.pdThumbImg, p.pdPrice * c.cartStock AS totalPrice
+		FROM cart c
+		INNER JOIN products p ON c.pdNum = p.pdNum
+		WHERE c.memberid = #{memberid} AND c.cartNum = #{cartNum}
+	</select>
+	
+	<!-- 주문정보 저장 -->
+	<insert id="orderSave">
+		INSERT INTO orderinfo (orderid, memberid, name, tel, email, address, address_postcode, address_primary, address_detail, totalPrice)
+		VALUES (#{orderid}, #{memberid}, #{name}, #{tel}, #{email}, #{address}, #{address_postcode}, #{address_primary}, #{address_detail}, #{totalPrice})
+	</insert>
+	
+	<!-- 장바구니 주문상세 저장 -->
+	<insert id="orderDetailSave">
+	    INSERT INTO orderdetail (detailid, orderid, pdNum, cartStock, totalPrice)
+	    	SELECT orderdetail_seq.nextval, #{orderDetailVo.orderid}, c.pdNum, c.cartStock, p.pdPrice * c.cartStock AS totalPrice
+	    	FROM cart c
+	    	INNER JOIN products p ON c.pdNum = p.pdNum
+	    	WHERE c.memberid = #{memberid}
+	    	AND c.cartNum IN
+		    <foreach collection="cartNums" item="cartNum" open="(" separator="," close=")">
+		        #{cartNum}
+		    </foreach>
+	</insert>
+	
+	<!-- 주문완료된 장바구니 삭제 -->
+	<delete id="deleteOrderedCart">
+		DELETE FROM cart
+		WHERE cartNum IN
+		<foreach collection="array" item="cartNum" open="(" separator="," close=")">
+			#{cartNum}
+		</foreach>
+	</delete>
+	
+	<!-- 장바구니 번호 -->
+	<select id="getCartNum" resultType="int">
+		SELECT cartNum
+		FROM cart
+		WHERE memberid = #{memberid} AND pdNum = #{pdNum} AND cartStock = #{cartStock}
+	</select>
+	
+	<!-- 주문상세 가져오기 -->
+	<select id="getOrderDetail" resultType="com.spring.shop.vo.OrderDetailVo">
+		SELECT o.detailid, o.orderid, o.pdNum, o.cartStock, o.totalPrice, p.pdThumbImg, p.pdName
+		FROM orderdetail o
+		INNER JOIN products p ON o.pdNum = p.pdNum
+		WHERE o.orderid = #{orderid}
+	</select>
+	
+	<!-- 주문정보 가져오기 -->
+	<select id="getOrderInfoList" resultType="com.spring.shop.vo.OrderInfoVo">
+		SELECT orderid, memberid, name, email, tel, address, address_postcode, address_primary, address_detail, order_status, orderDate, totalPrice 
+		FROM orderinfo
+		WHERE memberid = #{memberid}
+	</select>
+	
+	<!-- 리뷰 작성 -->
+	<insert id="writeReview">
+		INSERT INTO reviews (memberid, pdNum, reviewText, reviewImg, rating)
+		VALUES (#{memberid}, #{pdNum}, #{reviewText}, #{reviewImg}, #{rating})
+	</insert>
+	
+	<!-- 리뷰 가져오기 -->
+	<select id="getReviewList" resultType="com.spring.shop.vo.ReviewVo">
+		SELECT r.reviewid, r.memberid, r.pdNum, r.reviewText, r.reviewImg, r.rating, TO_CHAR(r.reviewDate, 'YYYY/MM/DD') AS reviewDate, p.pdName
+		FROM reviews r
+		INNER JOIN products p ON p.pdNum = r.pdNum
+		WHERE memberid = #{memberid}
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview" parameterType="hashMap">
+		DELETE FROM reviews
+		WHERE reviewid = #{reviewid} AND memberid = #{memberid}
+	</delete>
+	
+	<!-- 전체 리뷰 가져오기 -->
+	<select id="getAllReviewList" resultType="com.spring.shop.vo.ReviewVo">
+		SELECT reviewid, memberid, pdNum, reviewText, reviewImg, rating, TO_CHAR(reviewDate, 'YYYY/MM/DD') AS reviewDATE
+		FROM reviews
+		WHERE pdNum = #{pdNum}
+	</select>
+	
+	<!-- 전체 리뷰 평균 -->
+	<select id="getReviewAvg" resultType="double">
+		SELECT ROUND(AVG(rating), 1) AS ratingAvg
+		FROM reviews
+		WHERE pdNum = #{pdNum}
+	</select>
+	<!-- 포인트 사용(포인트 테이블) -->
+	<insert id="insertPointUsage" parameterType="hashMap">
+		INSERT INTO point (memberid, usagePoint, point)
+		VALUES (#{memberid}, #{usedPoint}, #{afterUsagePoint})
+	</insert>
+	
+	<!-- 포인트 적립(포인트 테이블) -->
+	<insert id="insertAccumulatePoint" parameterType="hashMap">
+		INSERT INTO point (memberid, accumulatePoint, point)
+		VALUES (#{memberid}, #{accumulatePoint}, #{afterAccumulatePoint})
+	</insert>
+	
+	<!-- 포인트 내역 -->
+	<select id="getPointList" resultType="com.spring.shop.vo.PointVo">
+		SELECT p.pointid, p.memberid, p.accumulatePoint, p.usagePoint, p.point, TO_CHAR(p.pointDate,'YYYY/MM/DD PM HH:MI:SS') AS pointDate, m.name
+		FROM point p
+		INNER JOIN member m ON m.memberid = p.memberid
+		WHERE p.memberid = #{memberid}
+		ORDER BY p.pointid DESC
+	</select>
+	
+	<!-- 포인트 내역 기간 조회 -->
+	<select id="showPointDate" parameterType="hashMap" resultType="com.spring.shop.vo.PointVo">
+		SELECT p.pointid, p.memberid, p.accumulatePoint, p.usagePoint, p.point, TO_CHAR(p.pointDate,'YYYY/MM/DD PM HH:MI:SS') AS pointDate, m.name
+		FROM point p
+		INNER JOIN member m ON m.memberid = p.memberid
+		WHERE p.pointDate BETWEEN #{startDate} AND #{endDate} AND p.memberid = #{memberid}
+		ORDER BY p.pointid DESC
+	</select>
+</mapper>

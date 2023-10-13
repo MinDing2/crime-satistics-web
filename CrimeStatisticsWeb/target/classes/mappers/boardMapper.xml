@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+
+	<select id="getList" resultType="com.spring.board.vo.BoardVo">
+
+		SELECT
+		BNUM
+		, MENU_ID
+		, TITLE
+		, CONT
+		, WRITER
+		, TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE
+		, READCOUNT
+		FROM BOARD
+		WHERE MENU_ID = #{menu_id}
+		ORDER BY BNUM DESC
+	</select>
+	<!-- 새 게시글 추가 -->
+	<insert id="insertBoard">
+
+		INSERT INTO BOARD (
+		BNUM
+		, MENU_ID
+		, TITLE
+		, CONT
+		, WRITER
+		) VALUES (
+		( SELECT NVL(MAX(BNUM), 0)+1 FROM BOARD ),
+		#{ menu_id },
+		#{
+		title },
+		#{ cont },
+		#{ writer }
+		)
+	</insert>
+
+	<!-- 게시물 조회 -->
+	<select id="getView" resultType="com.spring.board.vo.BoardVo">
+		SELECT
+		BNUM
+		, MENU_ID
+		, TITLE
+		, CONT
+		, WRITER
+		, TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE
+		, READCOUNT
+		, LIKEHIT
+		FROM BOARD
+		WHERE BNUM = #{ bnum }
+
+
+	</select>
+
+	<update id="readCount">
+
+		UPDATE BOARD
+		SET READCOUNT = READCOUNT + 1
+		WHERE BNUM =
+		#{ bnum }
+
+	</update>
+
+	<!-- 게시물 수정 -->
+	<update id="updateBoard">
+
+		UPDATE BOARD
+		SET TITLE = #{ title }
+		, CONT = #{ cont }
+		WHERE BNUM = #{ bnum }
+
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="deleteBoard">
+		DELETE FROM BOARD
+		WHERE BNUM = #{ bnum }
+	</delete>
+	<!-- 게시물 목록 + 페이징 -->
+	<select id="listPage" resultType="com.spring.board.vo.BoardVo"
+		parameterType="com.spring.board.domain.Criteria">
+		SELECT BNUM,MENU_ID,TITLE, CONT, WRITER,
+		TO_CHAR(REGDATE, '""YYYY"년 "MM"월 "DD"일"') REGDATE, READCOUNT
+		FROM (
+		SELECT BNUM,MENU_ID, TITLE, CONT, WRITER, REGDATE, READCOUNT,
+		ROW_NUMBER() OVER(ORDER BY BNUM DESC) AS RNUM
+		FROM BOARD
+		WHERE MENU_ID =
+		#{menu_id}
+
+		) MB
+		WHERE RNUM between #{rowStart} and #{rowEnd}
+		ORDER BY BNUM DESC
+	</select>
+
+	<select id="listCount" resultType="int">
+	 <![CDATA[select count(bnum) from board where menu_id = #{menu_id}]]>
+	</select>
+
+	<!-- 검색 -->
+	<select id="listSearch" resultType="com.spring.board.vo.BoardVo"
+		parameterType="com.spring.board.domain.SearchCriteria">
+		SELECT BNUM,MENU_ID,TITLE, CONT, WRITER, TO_CHAR(REGDATE, '""YYYY"년
+		"MM"월 "DD"일"') REGDATE, READCOUNT, LIKEHIT
+		FROM (
+		SELECT BNUM,MENU_ID,
+		TITLE, CONT, WRITER, REGDATE, READCOUNT, LIKEHIT,
+		ROW_NUMBER()
+		OVER(ORDER BY BNUM DESC) AS RNUM
+		FROM BOARD
+		WHERE MENU_ID = #{menu_id}
+		<include refid="search"></include>
+		) MB
+		WHERE RNUM between #{rowStart} and #{rowEnd}
+		<include refid="sort"></include>
+	</select>
+
+
+	<select id="countSearch" resultType="int">
+		SELECT count(bnum)
+		FROM board
+		WHERE MENU_ID = #{menu_id}
+		<include refid="search"></include>
+	</select>
+	<sql id="search">
+		<if test="searchType != null and keyword != null and keyword != ''">
+			<if test="searchType == 't'.toString()">AND title like '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND cont like '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND writer like '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (title like '%' || #{keyword} || '%' OR cont like '%'
+				|| #{keyword} || '%')</if>
+		</if>
+	</sql>
+	<sql id="sort">
+		<if test="sort== null">
+			ORDER BY BNUM DESC
+		</if>
+		<if test="sort== 'bnum'">
+			ORDER BY BNUM DESC
+		</if>
+		<if test="sort== 'readcount'">
+			ORDER BY READCOUNT DESC
+		</if>
+		<if test="sort== 'likehit'">
+			ORDER BY LIKEHIT DESC
+		</if>
+	</sql>
+
+	<!-- 작성한 게시물 수 -->
+	<select id="myBoardcnt" parameterType="hashMap" resultType="int">
+		SELECT COUNT(BNUM)
+		FROM BOARD
+		WHERE WRITER = #{nickname}
+	</select>
+	
+	<!-- 작성한 게시물 목록 -->
+	<select id="myboardList" resultType="com.spring.board.vo.BoardVo">
+	SELECT
+		BNUM
+		, MENU_ID
+		, TITLE
+		, CONT
+		, WRITER
+		, TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE
+		, READCOUNT
+		FROM BOARD
+		WHERE WRITER = #{nickname}
+		ORDER BY BNUM DESC
+		FETCH FIRST 5 ROWS ONLY
+	</select>
+	
+	<!-- 좋아요 누른 게시물 목록 -->
+	<select id="mylikeList" resultType="com.spring.board.vo.BoardVo">
+	        SELECT
+            b.BNUM
+            , b.MENU_ID
+            , b.TITLE
+            , b.CONT
+            , b.WRITER
+            , TO_CHAR(b.REGDATE, 'YYYY-MM-DD') REGDATE
+            , b.READCOUNT
+        FROM BOARD b
+        INNER JOIN LIKES l ON b.BNUM = l.BNUM 
+        WHERE l.MEMBERID = #{memberid} AND l.LIKECHECK = 1
+        ORDER BY BNUM DESC
+        FETCH FIRST 5 ROWS ONLY
+	</select>
+
+</mapper>
