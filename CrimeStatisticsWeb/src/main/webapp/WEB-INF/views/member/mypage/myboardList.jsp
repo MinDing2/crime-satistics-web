@@ -233,7 +233,7 @@ td {
     color: olive; 
 }
 footer{
-  position: fixed;
+  margin-top:250px;
   bottom: 0;
   width:100%
 }

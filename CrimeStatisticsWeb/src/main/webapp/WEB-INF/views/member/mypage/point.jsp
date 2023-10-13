@@ -581,6 +581,9 @@ td {
 		    	
 		    	location.href = '/member/mypage/point/date?startDate=' + startDate + '&endDate=' + endDate;
 		    });
+		 	// 포인트 기본값	
+	          $('#startDate').val(new Date().toISOString().substring(0,10));
+	          $('#endDate').val(new Date().toISOString().substring(0,10));
 		});
 		
 		// 휴대폰 번호 '-' 추가		function formatPhoneNumber(phoneNumber) {
