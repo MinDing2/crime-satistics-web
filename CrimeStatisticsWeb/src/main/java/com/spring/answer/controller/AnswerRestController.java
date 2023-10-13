@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,6 @@ public class AnswerRestController {
 
 	@Autowired
 	private AnswerService answerService;
-	
 	@PostMapping("/modify")
 	public  ResponseEntity<String> postModify(@RequestParam("answer_id") int answer_id,
 							 @RequestParam("answer_cont") String answer_cont,
@@ -31,11 +31,11 @@ public class AnswerRestController {
 							 HttpSession session
 							) throws Exception {
 
-		 // ¼¼¼Ç¿¡¼­ ·Î±×ÀÎÇÑ °ü¸®ÀÚ ID¸¦ °¡Á®¿É´Ï´Ù. ÀÌ°ÍÀº °ü¸®ÀÚ·Î ·Î±×ÀÎµÈ °æ¿ì¿¡¸¸ °ªÀÌ Á¸ÀçÇÕ´Ï´Ù.
+		 
 	    String adminId = (String) session.getAttribute("adminid");
 
 	    if (adminId != null) {
-	        // °ü¸®ÀÚ·Î ·Î±×ÀÎµÇ¾î ÀÖÀ» °æ¿ì¿¡¸¸ ¼öÁ¤À» Çã¿ëÇÕ´Ï´Ù.
+	      
 	        AnswerVo answerVo = new AnswerVo();
 
 	        answerVo.setAnswer_id(answer_id);
@@ -44,13 +44,36 @@ public class AnswerRestController {
 
 	        answerService.modify(answerVo);
 
-	        // ¼öÁ¤ÀÌ ¼º°øÇßÀ» ¶§, ¼º°ø ÀÀ´äÀ» ¹İÈ¯ÇÕ´Ï´Ù.
+	        
 	        return new ResponseEntity<>("Answer modified successfully", HttpStatus.OK);
 	    } else {
-	        // °ü¸®ÀÚ·Î ·Î±×ÀÎµÇÁö ¾ÊÀº °æ¿ì¿¡´Â ¼öÁ¤À» °ÅºÎÇÏ°í ±ÇÇÑ ¾øÀ½ ÀÀ´äÀ» ¹İÈ¯ÇÕ´Ï´Ù.
+	       
 	        return new ResponseEntity<>("Access denied. You must be logged in as an admin to modify answers.", HttpStatus.FORBIDDEN);
 	    }
+	   
+	
+	
 
+
+		
+	
+	    /*
+	     		@GetMapping("/delete")
+		    public String getDelete(AnswerVo vo, HttpSession session, HttpServletRequest request) {
+			
+			String loggedInAdminId = (String) session.getAttribute("adminid");
+			
+			if(loggedInAdminId == null) {
+				request.setAttribute("msg", "ê´€ë¦¬ìê¶Œí•œì´ í•„ìš”í•©ë‹ˆë‹¤");
+				request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
+				return "question/alert";
+			}
+			
+			answerService.delete(vo);
+			
+			return "redirect:/question/view?question_id=" + vo.getQuestion_id();
+		}
+	     */
 	}	
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +48,14 @@ public class QuestionController {
 	
 	//질문 작성 폼
 	@GetMapping("/writeform")
-	public String getWrite(Model model, HttpSession session) {
+	public String getWrite(Model model, HttpSession session, HttpServletRequest request) {
 		String memberid = (String)session.getAttribute("memberid");
-
+		
+		if(memberid == null) {
+			request.setAttribute("msg", "질문은 회원만 가능합니다.");
+			request.setAttribute("url", "http://localhost:8080" );
+			return "question/alert";
+		}
 		MemberVo findMember = memberService.findById(memberid);
 		
 		model.addAttribute("memberid", memberid);
@@ -62,12 +68,18 @@ public class QuestionController {
 	public String postwrite(QuestionVo vo, HttpSession session) {
 		
 		String memberid = (String)session.getAttribute("memberid");
+		
+		
+		
 		vo.setMemberid(memberid);
 		
 		questionService.insertQuestion(vo);
+		
 		return "redirect:/question/list";	
 	}
 	
+	
+	/*
 	//답글 작성 (관리자)
 	@PostMapping("/writeAnswer")
 	public String postwriteAnswer(AnswerVo vo, HttpSession session) {
@@ -81,6 +93,33 @@ public class QuestionController {
 		
 		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 	}
+
+	
+	@PostMapping("/writewAnswer")
+	public String postWrite(AnswerVo vo, HttpSession session,HttpServletRequest request) {
+		
+		String loggedInAdminId = (String) session.getAttribute("adminid");
+
+		
+		
+		if(loggedInAdminId == null) {
+			    //adminid
+		        request.setAttribute("msg", "관리권한이 필요합니다.");
+		        request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
+		        return "question/alert";
+		}
+		
+		
+		vo.setAdminid(loggedInAdminId);
+		//System.out.println(vo);
+	
+		
+		
+		answerService.write(vo);
+		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
+	}
+	*/
+	
 	
 	
 	//질문 조회 + 작성  잠만
@@ -102,10 +141,18 @@ public class QuestionController {
 	
 	//질문 수정 폼
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public void getModify(@RequestParam("question_id") int question_id, Model model) {
+	public String getModify(@RequestParam("question_id") int question_id, Model model,HttpSession session,HttpServletRequest request) {
 		QuestionVo vo = questionService.view(question_id);
+        String memberid = (String)session.getAttribute("memberid");
+		
+		if(memberid == null) {
+			request.setAttribute("msg", "수정은 회원만 가능합니다.");
+			request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id());
+			return "question/alert";
+		}
 
 		model.addAttribute("view", vo);
+		return "/question/modify";
 	}
 	
 	// 질문 수정
@@ -117,8 +164,19 @@ public class QuestionController {
 	
 	//질문 삭제
 	@GetMapping("/delete")
-	public String getDelete(@RequestParam("question_id") int question_id) {
+	public String getDelete(@RequestParam("question_id") int question_id, HttpSession session, HttpServletRequest request) {
+		
+		String memberid = (String)session.getAttribute("memberid");
+    /* // QuestionVo vo   =  questionService.view(question_id);
+		if(memberid == null) {
+			request.setAttribute("msg", "삭제는 회원만 가능합니다.");
+			request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id());
+			return "question/alert";
+		}
+	*/	 
 		questionService.delete(question_id);
+		
+		
 		return "redirect:/question/list";
 	}
 	

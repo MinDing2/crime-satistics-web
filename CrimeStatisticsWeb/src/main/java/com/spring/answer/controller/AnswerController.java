@@ -2,6 +2,7 @@ package com.spring.answer.controller;
 
 import java.net.http.HttpRequest;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,8 +37,8 @@ public class AnswerController {
 		
 		
 		if(loggedInAdminId == null) {
-			    //adminid°¡ ·Î±×ÀÎµÇÁö ¾ÊÀº °æ¿ì, JavaScript alert ¸Ş½ÃÁö¸¦ Ãâ·ÂÇÏ°í ÀÌÀü ÆäÀÌÁö·Î µÇµ¹¾Æ°¡±â
-		        request.setAttribute("msg", "°ü¸®±ÇÇÑÀÌ ÇÊ¿äÇÕ´Ï´Ù.");
+			    //adminid
+		        request.setAttribute("msg", "ê´€ë¦¬ê¶Œí•œì´ í•„ìš”í•©ë‹ˆë‹¤.");
 		        request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
 		        return "question/alert";
 		}
@@ -65,8 +66,18 @@ public class AnswerController {
 
 	//
 		@GetMapping("/delete")
-		public String getDelete(AnswerVo vo) {
+		public String getDelete(AnswerVo vo, HttpSession session, HttpServletRequest request) {
+			
+			String loggedInAdminId = (String) session.getAttribute("adminid");
+			
+			if(loggedInAdminId == null) {
+				request.setAttribute("msg", "ê´€ë¦¬ìê¶Œí•œì´ í•„ìš”í•©ë‹ˆë‹¤");
+				request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
+				return "question/alert";
+			}
+			
 			answerService.delete(vo);
+			
 			return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 		}
 }

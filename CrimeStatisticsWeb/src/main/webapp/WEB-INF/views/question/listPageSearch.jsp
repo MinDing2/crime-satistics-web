@@ -50,7 +50,7 @@
             <tbody>
                 <c:forEach items="${list}" var="list">
                     <tr>
-                        <th scope="row">${ list.question_id }</th>
+                        <td scope="row">${ list.question_id }</td>
                         <td><a href="/question/view?question_id=${list.question_id}">${ list.question_title }</a></td>
                         <td>${ list.nickname }</td>
                         <td>${ list.create_date }</td>
