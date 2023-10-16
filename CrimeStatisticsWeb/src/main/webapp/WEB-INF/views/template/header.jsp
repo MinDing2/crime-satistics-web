@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Nanum+Pen+Script&family=Orbit&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
   <style>
@@ -82,26 +83,102 @@
 #Info{
 font-family: 'IBM Plex Sans KR', sans-serif;
 }
+#navbarDropdown{
+ color: white;
+}
+.dropdown{
+margin-right: 150px;
+}
+#cate{
+display: flex; 
+justify-content: center; 
+margin-bottom: 30px; 
+margin-left: 300px;
+font-family: 'Nanum Gothic', sans-serif;
+font-size:20px;
+font-weight: 500;
+}
+
   </style>
 </head>
-
 <body>
-
-
 <nav class="navbar navbar-dark custom-c" style="background-color: #0f5485;">
-
   <div class="container-fluid">
-    
-    <button class="navbar-toggler custom-a " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div style="margin-left: 90px;"> <!-- Align the logo to the left -->
+    <div style="margin-left: 20px;"> <!-- Align the logo to the left -->
       <a class="navbar-brand" href="/">
         <img src="/img/logo.png" alt="Logo" height="80" width="80"> <!-- Set the height of the logo to match the navbar height -->
       </a>
     </div>
-
+   <div id="cate">
+    <div class="dropdown">
+	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    쇼 핑 몰
+	  </a>
+	  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	   <a class="dropdown-item" href="/shop/list" >전체 호신용품</a>
+		<hr class="dropdown-divider">
+		<a class="dropdown-item" href="/shop/list/100" >스프레이건</a>
+		<hr class="dropdown-divider">
+		<a class="dropdown-item" href="/shop/list/200" >스프레이</a>
+		<hr class="dropdown-divider">
+		<a class="dropdown-item" href="/shop/list/300" >전기충격기</a>
+		<hr class="dropdown-divider">
+		<a class="dropdown-item" href="/shop/list/400" >삼단봉</a>
+	  </div>
+	</div>   
+	<div style="margin-right: 150px;">
+	<a href="/board/listsearch?menu_id=1" style="text-decoration: none; color:white;">자유 게시판</a>
+	</div>
+    <div class="dropdown">
+	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    지역 커뮤니티
+	  </a>
+	  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	    <a  class="dropdown-item" href="/board/listsearch?menu_id=2">서울</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=3">부산</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=4">대구</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=5">인천</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=6">광주</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=7">대전</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=8">울산</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=9">경기</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=10">강원</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=11">충북</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=12">충남</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=13">전북</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=14">전남</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=15">경북</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=16">경남</a>
+            <hr class="dropdown-divider">
+            <a  class="dropdown-item" href="/board/listsearch?menu_id=17">제주</a>
+            <hr class="dropdown-divider"> 
+	  </div>
+	</div>   
+    <div class="dropdown">
+	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    Q & A
+	  </a>
+	  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	      <a  class="dropdown-item" href="/question/listPageSearch?num=1">Q&A</a>
+          <hr class="dropdown-divider">
+          <a  class="dropdown-item" href="/question/writeform">질문 작성</a>
+	  </div>
+	</div>
+	</div>   
     <div id ="Info" class="ml-auto  custom-a"> <!-- Align the login/sign-up links slightly off the right -->
       <c:choose>
       	<c:when test="${not empty sessionScope.naverid}">
@@ -146,84 +223,8 @@ font-family: 'IBM Plex Sans KR', sans-serif;
           <a class="login-link" href="/member/signup-page">회원가입</a>
         </c:otherwise>
       </c:choose>
+    </div>       
     </div>
-
-    <div class="offcanvas offcanvas-start text-bg-dark custom-mt" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" >
-      <div class="offcanvas-header">
-        <button type="button" class="btn-close btn-close-white text-reset custom-close-btn" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body" style= "background-color: rgba(8, 35, 56, 0.4)">
-        <ul class="navbar-nav">
-         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/board/listsearch?menu_id=1">자유게시판</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                지역 별 게시판
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=2">서울</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=3">부산</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=4">대구</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=5">인천</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=6">광주</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=7">대전</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=8">울산</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=9">경기</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=10">강원</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=11">충북</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=12">충남</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=13">전북</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=14">전남</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=15">경북</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=16">경남</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/board/listsearch?menu_id=17">제주</a></li>
-                <li><hr class="dropdown-divider"></li> 
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="/shop/list" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: center; font-size: 25px;">
-             쇼핑몰
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="/shop/list" style="text-align: center; font-size: 18px;">전체 호신용품</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/shop/list/100" style="text-align: center; font-size: 18px;">스프레이건</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/shop/list/200" style="text-align: center; font-size: 18px;">스프레이</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/shop/list/300" style="text-align: center; font-size: 18px;">전기충격기</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/shop/list/400" style="text-align: center; font-size: 18px;">삼단봉</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: center; font-size: 25px;">Q&A 게시판</a>
-              <ul class="dropdown-menu dropdown-menu-dark" >
-                <li><a  class="dropdown-item" href="/question/listPageSearch?num=1">Q&A</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a  class="dropdown-item" href="/question/writeform">질문 작성</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </nav>
 
 </body>

@@ -88,6 +88,11 @@ table.table-hover tbody tr:hover {
 .custom-sort-links a:hover {
  background-color: #0F3A5F;
 }
+footer{
+  margin-top:200px;
+  bottom: 0;
+  width:100%
+}
 
 </style>
 </head>
@@ -95,10 +100,10 @@ table.table-hover tbody tr:hover {
 	<header>
 		<%@ include file="../template/header.jsp"%>
 	</header>
-	<main style="margin:0 auto 50px;  width:900px;">
+	<main style="margin:0 auto 50px;  width:900px; height:690px;">
 		<!-- 제목 -->
 		<div class="container">
-			<h2 class="community-title">${name}커뮤니티</h2>
+			<h2 class="community-title">${name} 커뮤니티</h2>
 		</div>
 
 		<!-- 검색 -->
@@ -189,7 +194,7 @@ table.table-hover tbody tr:hover {
 		</div>
 		<%@ include file="../board/include/SearchPaging.jsp"%>
 	</main>
-	<%@ include file="../template/footer.jsp"%>
+	<footer><%@ include file="../template/footer.jsp"%></footer>
 </body>
 <!-- 스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
