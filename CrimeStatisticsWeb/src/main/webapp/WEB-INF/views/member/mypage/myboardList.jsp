@@ -237,6 +237,9 @@ footer{
   bottom: 0;
   width:100%
 }
+main{
+font-family: 'IBM Plex Sans KR', sans-serif;
+}
 
 </style>
 </head>

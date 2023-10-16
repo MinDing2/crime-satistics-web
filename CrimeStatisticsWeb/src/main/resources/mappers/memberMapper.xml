@@ -30,7 +30,7 @@
 		UPDATE member
 		SET passwd = #{passwd}, nickname = #{nickname}, address = #{address},
 			email  = #{email},  address_postcode = #{address_postcode}, address_primary = #{address_primary},
-			address_detail = #{address_detail}, email_id = #{emailId}, email_domain = #{emailDomain}
+			address_detail = #{address_detail}, email_id = #{emailId}, email_domain = #{emailDomain}, tel = #{tel}
 		WHERE memberid = #{memberid}
 	</update>
 	

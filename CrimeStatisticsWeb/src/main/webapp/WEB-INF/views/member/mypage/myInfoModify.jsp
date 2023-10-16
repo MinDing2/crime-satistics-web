@@ -227,7 +227,7 @@ div {
 	margin-top: 60px;
 }
 
-.btn {
+#btn {
     background-color: transparent !important;
     border-color: white !important;
     color: white !important;
@@ -364,7 +364,7 @@ width:80%;
                </div>
                <div class="right" style="display: flex; align-items: center; margin-left: 200px; font-weight: normal; font-size: 15px;">
                   <div>${member.tel} / ${member.email}</div>
-                  <button type="button" class="btn">회원정보수정</button>
+                  <button type="button" id="btn" class="btn">회원정보수정</button>
                </div>
             </div>
          </div>
@@ -505,8 +505,7 @@ width:80%;
                <input type="text" id="address_primary" name="address_primary" value="${member.address_primary}" style="width:100%; margin-bottom:10px;" placeholder="기본주소" readonly />
                <input type="text" name="address_detail" style="width:100%" value="${member.address_detail}" autocomplete="off" placeholder="상세 주소(선택 사항)">
                </div>
-               </div>
-               
+               </div>               
                <div style="margin-bottom: 20px; margin-left: 10px;">번호
                <input type="text" name="tel" id="tel" value="${member.tel}" style="float:right; width:80%;" autocomplete="off" required />
                </div>

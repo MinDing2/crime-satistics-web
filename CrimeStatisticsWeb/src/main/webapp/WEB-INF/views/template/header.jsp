@@ -9,6 +9,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Nanum+Pen+Script&family=Orbit&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
   <style>
@@ -76,6 +79,9 @@
     right: 15px;
     font-size: 20px;
 }
+#Info{
+font-family: 'IBM Plex Sans KR', sans-serif;
+}
   </style>
 </head>
 
@@ -96,7 +102,7 @@
       </a>
     </div>
 
-    <div class="ml-auto  custom-a"> <!-- Align the login/sign-up links slightly off the right -->
+    <div id ="Info" class="ml-auto  custom-a"> <!-- Align the login/sign-up links slightly off the right -->
       <c:choose>
       	<c:when test="${not empty sessionScope.naverid}">
       		<style>

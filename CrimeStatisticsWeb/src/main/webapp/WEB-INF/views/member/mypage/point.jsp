@@ -19,7 +19,9 @@ body {
 	padding: 0;
 	margin: 0;
 }
-
+main{
+font-family: 'IBM Plex Sans KR', sans-serif;
+}
 div {
 	box-sizing: border-box;
 }
