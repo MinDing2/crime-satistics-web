@@ -80,12 +80,14 @@ ul, li {
 .productsSet li:hover {
   border: 2px solid #87CEFA; /* 하늘색으로 변경 */
 }
+footer{
+}
 </style>
 </head>
 <body>
 	<header><%@ include file="../template/header.jsp"%></header>
 
-	<main style="width: 70%; margin: 0 auto; margin-top: 50px; height: 720px;">
+	<main style="width: 70%; margin: 0 auto; margin-top: 50px; height: 100%;">
 		<ul class="categoryTabs" style="font-size: 20px;">
 			<li><a href="/shop/list">전체 호신용품</a></li>
 			<li><a href="/shop/list/100">스프레이건</a></li>

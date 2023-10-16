@@ -44,9 +44,8 @@ public class NoticeController {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("nvo", nvo);
-		mv.setViewName("redirect:/notice/list");
-		
-		System.out.println(nvo);
+		mv.setViewName("redirect:/notice/list");		
+	
 		return mv;
 	}
 	//공지글 목록

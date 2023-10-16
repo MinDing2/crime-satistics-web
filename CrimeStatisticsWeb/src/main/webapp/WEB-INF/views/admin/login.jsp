@@ -17,7 +17,7 @@
   .section {
     display: flex;
     border: 1px solid #ccc; /* 선으로 나누기 */
-    border-bottom: none; /* 밑에 부분 선을 제거합니다. */
+    /* border-bottom: none; /* 밑에 부분 선을 제거합니다. */
   }
 
   .column {
@@ -188,9 +188,9 @@
   }
 </script>
 </head>
-<body style="background-color: #cccccc;">
+<body>
 	<header><%@ include file="../template/header.jsp"%></header>
-<main style="text-align: center; height: 100%; margin-top: 150px;">
+<main style="text-align: center; height: 500px; margin-top: 150px; ">
 		
 		<form id="loginForm" action="/admin/login" method="post" style = "width:500px; height:100%;" >
 		     <h1>Login</h1>
@@ -213,7 +213,7 @@
 		</form>
 	</main>
 	
-	<footer><%@ include file="../template/footer.jsp"%></footer>
+	<footer style="margin-top:110px;"><%@ include file="../template/footer.jsp"%></footer>
 
 	<script>
 		$(document).ready(function() {

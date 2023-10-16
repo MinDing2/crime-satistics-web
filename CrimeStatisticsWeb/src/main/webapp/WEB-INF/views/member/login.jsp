@@ -18,7 +18,7 @@
   .section {
     display: flex;
     border: 1px solid #ccc; /* 선으로 나누기 */
-    border-bottom: none; /* 밑에 부분 선을 제거합니다. */
+    /* border-bottom: none; /* 밑에 부분 선을 제거합니다. */
   }
 
   .column {
@@ -189,7 +189,7 @@
   }
 </script>
 </head>
-<body style="background-color: #cccccc;">
+<body>
 	<header><%@ include file="../template/header.jsp"%></header>
 <main style="text-align: center; height: 100%; margin-top: 130px;">
 		
