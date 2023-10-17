@@ -460,7 +460,7 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 				        <tbody>
 				            <c:forEach var="reply" items="${myreplyList}">
 				                <tr>
-				                    <td class="comment-number" style="width: 100px;">${reply.rnum}</td>
+				                    <td class="comment-number" style="width: 100px; font-weight: bold;">${reply.rnum}</td>
 				                    <td class="comment-author" style="width: 150px;">${reply.writer}</td>
 				                    <td class="comment-date" style="width: 150px;">
 				                        <fmt:formatDate value="${reply.regdate}" pattern="yyyy-MM-dd" />
