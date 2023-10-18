@@ -34,51 +34,34 @@ public class AnswerController {
 	public String postWrite(AnswerVo vo, HttpSession session,HttpServletRequest request) {
 		
 		String loggedInAdminId = (String) session.getAttribute("adminid");
-
-		
 		
 		if(loggedInAdminId == null) {
-			    //adminid
-		        request.setAttribute("msg", "관리권한이 필요합니다.");
+		        request.setAttribute("msg", "관리자권한입니다.");
 		        request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
 		        return "question/alert";
 		}
 		
-		
 		vo.setAdminid(loggedInAdminId);
-		//System.out.println(vo);
-	
-		
-		
+
 		answerService.write(vo);
 		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 	}
 	
 	
-	//
-//	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-//	public String postModify(AnswerVo vo) throws Exception {
-//
-//		answerService.modify(vo);
-//
-//		return "redirect:/question/view?question_id=" + vo.getQuestion_id();
-//	}
-	
 
-	//
 		@GetMapping("/delete")
 		public String getDelete(AnswerVo vo, HttpSession session, HttpServletRequest request) {
 			
 			String loggedInAdminId = (String) session.getAttribute("adminid");
 			
 			if(loggedInAdminId == null) {
-				request.setAttribute("msg", "관리자권한이 필요합니다");
+				request.setAttribute("msg", "관리자권한입니다");
 				request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
 				return "question/alert";
 			}
 			
 			answerService.delete(vo);
-			
+	
 			return "redirect:/question/view?question_id=" + vo.getQuestion_id();
 		}
 }

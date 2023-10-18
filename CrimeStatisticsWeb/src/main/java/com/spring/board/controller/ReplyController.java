@@ -19,7 +19,7 @@ public class ReplyController {
 	private ReplyService replyService;
 	
 	
-	//댓글작성
+	//
 	@PostMapping("/write")
 	public ModelAndView write(ReplyVo vo) {
 		
@@ -29,7 +29,7 @@ public class ReplyController {
 		return mv;
 		
 	}
-	//댓글수정
+	//
 	@PostMapping("/update")
 	public ModelAndView update(ReplyVo vo) {
 		replyService.updateReply(vo);
@@ -39,7 +39,7 @@ public class ReplyController {
 		return mv;		
 	}
 	
-	//댓글삭제
+	//
 	@GetMapping("/delete")
 	public ModelAndView delete(ReplyVo vo) {
 		

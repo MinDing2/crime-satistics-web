@@ -19,6 +19,7 @@ String responseJSON = "{\"loggedIn\": " + (memberid != null) + "}";
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Nanum+Gothic+Coding&family=Nanum+Pen+Script&family=Orbit&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <title>home</title>
 <style>
 .table-container {
@@ -99,7 +100,7 @@ color:#0F3A5F;
 <body style="height: 100vh;">
    <header><%@ include file="template/header.jsp"%></header>
   <div class="row">
-    <!-- 왼쪽 열: 지도 -->
+    <!-- 왼쪽 열: 지도 -->ㄴ
     <div class="col-md-6"  style="width: 611px; height:900px; margin-left: 12%; margin-bottom: 0%; margin-top:0">
       <div class="svg-container" style="width:700px; height: 900px;  margin-top: 0">
         <object id= "mapSvg "data="/img/southKoreaHigh.svg" width="100%" height="100%"></object>

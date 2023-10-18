@@ -81,7 +81,6 @@ ul, li {
   border: 2px solid #87CEFA; /* 하늘색으로 변경 */
 }
 footer{
-margin-top: 100px;
 }
 </style>
 </head>

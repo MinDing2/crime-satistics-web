@@ -29,7 +29,7 @@
     , question_content
     , m.nickname
     , create_date
-	FROM
+	FROM 
     	question q
 	INNER JOIN 
    		 MEMBER m ON q.memberid = m.memberid
@@ -99,7 +99,7 @@
 		WHERE m.nickname like '%' || #{keyword} || '%'
 	</if>
 	
-	ORDER BY question_id ASC 
+	ORDER BY question_id DESC
     	OFFSET #{displayPost} ROWS
     	FETCH FIRST #{postNum} ROWS ONLY
 	</select>

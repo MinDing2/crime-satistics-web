@@ -273,7 +273,7 @@ width:80%;
 <body>
 <header><%@ include file="../../template/header.jsp"%></header>
     <main style="display: flex; width: 65%; margin: 0 auto;">
-      <div class="wrap" style="flex: 1; ">
+      <div class="wrap" style="flex: 1; height:720px;">
          <div class="grayContainer" style="display: flex; justify-content: center; align-items: center;">
              <div>
                  <div class="name" style="text-align: center;">MY페이지</div>
@@ -335,6 +335,14 @@ width:80%;
                <div class="icon">ii</div>
                <div class="text">
                   좋아요 누른 게시물
+               </div>
+               <div class="right">></div>
+            </a>
+            
+               <a href="/member/mypage/myanswer?num=1" class="item">
+               <div class="icon">ii</div>
+               <div class="text">
+                  작성한 질문 
                </div>
                <div class="right">></div>
             </a>
@@ -462,6 +470,16 @@ width:80%;
                             </div>
                         </div>
                     </li>
+                    <li>
+				         <div style="display: flex; justify-content: space-between; align-items: center;">
+				               <div>작성 질문</div>
+				               <div style="margin-right: 20px;">
+				                <a href="/member/mypage/myanswer" class="splita">
+				                		<span style="color: red; font-weight: bold;">${questionCnt} </span>건
+				               	</a>
+				              </div>
+				            </div>
+				    </li>
                 </ul>
              </div>
          </div>
