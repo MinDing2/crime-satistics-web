@@ -109,7 +109,7 @@
 		SELECT BNUM,MENU_ID,
 		TITLE, CONT, WRITER, REGDATE, READCOUNT, LIKEHIT,
 		ROW_NUMBER()
-		OVER(ORDER BY BNUM DESC) AS RNUM
+		OVER(<include refid="sort"></include>) AS RNUM
 		FROM BOARD
 		WHERE MENU_ID = #{menu_id}
 		<include refid="search"></include>

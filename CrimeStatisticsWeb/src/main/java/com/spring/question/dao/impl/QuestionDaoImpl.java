@@ -68,7 +68,9 @@ public class QuestionDaoImpl implements QuestionDao {
 		
 		return sqlSession.selectList(namespace + ".listPage", data);
 	}
-
+	
+	
+	//질문 목록 + 페이징 + 검색
 	@Override
 	public List<QuestionVo> listPageSearch(int displayPost, int postNum, String searchType, String keyword) {
 		  
@@ -93,6 +95,31 @@ public class QuestionDaoImpl implements QuestionDao {
 	 data.put("keyword", keyword);
 	 
 	 return sqlSession.selectOne(namespace + ".searchCount", data); 
+	}
+	
+	// 마이페이지 질문 목록 
+	@Override
+	public List<QuestionVo> listMyPage(int displayPost, int postNum, String memberid) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+	
+		data.put("displayPost",displayPost);
+		data.put("postNum", postNum);
+		data.put("memberid", memberid);
+		
+		return sqlSession.selectList(namespace + ".mypageAnswerList", data);
+	}
+	
+	// 마이페이지 질문 개수
+	@Override
+	public Object questionCnt(String memberid, String nickname) {
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("memberid",  memberid);
+		data.put("nickname", nickname);
+		
+		return sqlSession.selectOne(namespace + ".questionCnt", data);
 	}
 }
 

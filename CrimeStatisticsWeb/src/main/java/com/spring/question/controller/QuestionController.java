@@ -53,7 +53,7 @@ public class QuestionController {
 		String memberid = (String)session.getAttribute("memberid");
 		
 		if(memberid == null) {
-			request.setAttribute("msg", "관리자 권한입니다.");
+			request.setAttribute("msg", "로그인이 필요합니다.");
 			request.setAttribute("url", "http://localhost:8080" );
 			return "question/alert";
 		}
@@ -101,7 +101,7 @@ public class QuestionController {
         String memberid = (String)session.getAttribute("memberid");
 		
 		if(memberid == null) {
-			request.setAttribute("msg", "회원만 가능합니다.");
+			request.setAttribute("msg", "로그인이 필요합니다.");
 			request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id());
 			return "question/alert";
 		}
@@ -125,7 +125,7 @@ public class QuestionController {
 		
         QuestionVo vo   =  questionService.view(question_id);
 		if(memberid == null) {
-			request.setAttribute("msg", "관리자 권한입니다.");
+			request.setAttribute("msg", "회원만 가능합니다.");
 			request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id());
 			return "question/alert";
 		}

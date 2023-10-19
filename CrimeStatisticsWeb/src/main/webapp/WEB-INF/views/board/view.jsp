@@ -94,10 +94,14 @@ font-family: 'Nanum Gothic Coding', monospace;
               </a>
               <p class="mb-0" style="font-size:20px;">(${vo.likehit})</p>
           </div>
-      </c:if>
+      </c:if>      
        <div style="margin-bottom: 30px;">
-            <a href="/board/updateform?bnum=${vo.bnum}" id="update" class="btn btn-danger ml-2">수정</a>
+       <c:if test="${vo.writer == sessionScope.nickname}">
+          <a href="/board/updateform?bnum=${vo.bnum}" id="update" class="btn btn-danger ml-2">수정</a>
           <button id="delete" class="btn btn-danger">삭제</button>
+       </c:if>
+          <a href="/board/listsearch?menu_id=${vo.menu_id}" class="btn btn-danger">목록으로</a>
+          <a href="javascript:history.back()" class="btn btn-danger">이전으로</a>
        </div>        
         <%@ include file="../board/include/reply.jsp"%>
      </main>   

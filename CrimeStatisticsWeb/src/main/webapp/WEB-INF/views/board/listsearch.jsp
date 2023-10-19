@@ -121,7 +121,7 @@
 					</select>
 				</div>
 				<input type="text" class="form-control" name="keyword"
-					id="keywordInput" placeholder="검색어를 입력하세요">
+					id="keywordInput" placeholder="검색어를 입력하세요" autocomplete="off">
 				<button id="searchBtn" class="btn btn-danger" style="width: 80px;">검색</button>
 			</div>
 		</div>

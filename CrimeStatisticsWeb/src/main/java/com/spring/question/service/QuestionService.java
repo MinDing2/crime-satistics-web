@@ -32,4 +32,9 @@ public interface QuestionService {
 	// 게시물 총 갯수 + 검색 적용
 	public int searchCount(String searchType, String keyword);
 	
+	// 마이페이지 질문 리스트 
+	public List<QuestionVo> listMyPage(int displayPost, int postNum, String memeberid);
+
+	public Object questionCnt(String memberid, String nickname);
+	
 }

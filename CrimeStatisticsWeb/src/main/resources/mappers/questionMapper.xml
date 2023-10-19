@@ -72,6 +72,7 @@
     FETCH FIRST #{postNum} ROWS ONLY
 	</select>
 	
+	
 	<!--  질문 목록 + 페이징 + 검색 -->
 	<select id= "listPageSearch" parameterType="hashMap" resultType="com.spring.question.vo.QuestionVo">
 	select 
@@ -103,6 +104,8 @@
     	OFFSET #{displayPost} ROWS
     	FETCH FIRST #{postNum} ROWS ONLY
 	</select>
+		
+	
 
 	<!-- 질문 총 갯수 + 검색 적용 -->
 	<select id="searchCount" parameterType="hashMap"
@@ -126,10 +129,31 @@
 		<if test='searchType.equals("m.nickname")'>
 			WHERE m.nickname like '%' || #{keyword} || '%'
 		</if>
-
+	</select>
+	
+	<!-- 마이페이지 질문 개수 -->
+	<select id="questionCnt" parameterType = "hashMap" resultType = "int">
+	select count(question_id) 
+	from question 
+	where memberid = #{memberid} 
 	</select>
 	
 	
+	<!-- 마이페이지 질문 목록 -->
+	<select id = "mypageAnswerList" parameterType="hashMap" resultType="com.spring.question.vo.QuestionVo">
+		select
+			question_id,
+			question_title,
+			create_date,
+			m.nickname
+		from question q
+		inner join member m on q.memberid = m.memberid
+		where
+			q.memberid = #{memberid}
+			ORDER BY question_id DESC
+			OFFSET #{displayPost} ROWS
+			FETCH FIRST #{postNum} ROWS ONLY
+	</select>
 	
 	
 </mapper>

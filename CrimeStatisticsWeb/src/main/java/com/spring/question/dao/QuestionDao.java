@@ -33,4 +33,11 @@ public interface QuestionDao {
 	 
 	// 게시물 총 갯수 + 검색 적용
 	 public int searchCount(String searchType, String keyword);
+	 
+	 // 마이페이지 질문 목록 
+	 public List<QuestionVo> listMyPage(int displayPost, int postNum, String memberid);
+	 
+	//마이페이지 질문 개수 
+	public Object questionCnt(String memberid, String nickname);
+		 
 }

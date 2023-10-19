@@ -65,7 +65,7 @@ border-bottom:2px solid #0F3A5F;
                 작성자: ${nvo.writer} | 조회: ${nvo.readcount} 
             </div>
 	        <div class="post-info">
-	            등록일: ${nvo.regdate} | 마감일: ${nvo.regdate}
+	            등록일: ${nvo.regdate} | 마감일: ${nvo.enddate}
 	        </div>           
         </div>
     </div>

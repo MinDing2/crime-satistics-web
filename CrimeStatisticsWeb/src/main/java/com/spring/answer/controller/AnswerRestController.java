@@ -50,30 +50,6 @@ public class AnswerRestController {
 	       
 	        return new ResponseEntity<>("Access denied. You must be logged in as an admin to modify answers.", HttpStatus.FORBIDDEN);
 	    }
-	   
-	
-	
-
-
-		
-	
-	    /*
-	     		@GetMapping("/delete")
-		    public String getDelete(AnswerVo vo, HttpSession session, HttpServletRequest request) {
-			
-			String loggedInAdminId = (String) session.getAttribute("adminid");
-			
-			if(loggedInAdminId == null) {
-				request.setAttribute("msg", "관리자권한이 필요합니다");
-				request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id() );
-				return "question/alert";
-			}
-			
-			answerService.delete(vo);
-			
-			return "redirect:/question/view?question_id=" + vo.getQuestion_id();
-		}
-	     */
 	}	
 
 }

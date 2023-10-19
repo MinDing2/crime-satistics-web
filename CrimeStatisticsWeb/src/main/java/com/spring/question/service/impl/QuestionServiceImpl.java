@@ -70,5 +70,17 @@ public class QuestionServiceImpl implements QuestionService {
 	public int searchCount(String searchType, String keyword){
 	 return dao.searchCount(searchType, keyword);
 	}
+
+	// 마이페이지 질문 목록 
+	@Override
+	public List<QuestionVo> listMyPage(int displayPost, int postNum, String memberid) {	
+		return dao.listMyPage(displayPost, postNum, memberid);
+	}
+	
+	// 마이페이지 질문 개수
+	@Override
+	public Object questionCnt(String memberid, String nickname) {
+		return dao.questionCnt(memberid, nickname);
+	}
 	
 }

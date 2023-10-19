@@ -246,8 +246,8 @@
 						<input type="text" name="emailId" id="emailId" autocomplete="off"
 						placeholder="아이디" required />@ <input type="text"
 						name="emailDomain" id="emailDomain" value="" placeholder="도메인"
-						required /> <select
-						onclick="setEmailDomain(this.value);return false;">
+						required /> 
+						<select onclick="setEmailDomain(this.value);return false;" style="margin-top: 10px;">
 						<option value="">--직접입력--</option>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
@@ -260,10 +260,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" onclick="sendEmail()">Send
-						email</button>
+					<button type="button" class="btn btn-primary" onclick="sendEmail()">아이디 찾기</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 				</div>
 			</div>
 		</div>
