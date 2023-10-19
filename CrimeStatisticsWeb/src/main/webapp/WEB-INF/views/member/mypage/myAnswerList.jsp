@@ -287,7 +287,7 @@ h3 {
 	color: black;
 }
 footer{
-  position: fixed;
+  margin-top:200px;
   bottom: 0;
   width:100%
 }
@@ -514,9 +514,7 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 				        
 				    </ul>
 			    </div>
-			</div>
-			
-			
+			</div>			
 			<div class="verticalSplit">
 			    <!-- 여기에 콘텐츠 넣어보자 -->         
 		        <!-- 게시물 목록 -->
@@ -591,7 +589,7 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 		    var tel = telElement.text();
 		    telElement.text(formatPhoneNumber(tel));
 		    
-		    $('.btninfo').on('click', function() {
+		    $('#btn').on('click', function() {
 		    	location.href = '/member/mypage/modify';
 		    });
 		});

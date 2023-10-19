@@ -379,7 +379,7 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 					</div>
 					<div class="right" style="display: flex; align-items: center; margin-left: 200px; font-weight: normal; font-size: 15px;">
 						<div>${member.tel} / ${member.email}</div>
-						<button type="button" class="btn">회원정보수정</button>
+						<button type="button" id="btn"class="btn">회원정보수정</button>
 					</div>
 				</div>
 			</div>
@@ -508,7 +508,7 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 		    var tel = telElement.text();
 		    telElement.text(formatPhoneNumber(tel));
 		    
-		    $('.btn').on('click', function() {
+		    $('#btn').on('click', function() {
 		    	location.href = '/member/mypage/modify';
 		    });
 		    

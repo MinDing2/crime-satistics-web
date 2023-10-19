@@ -268,6 +268,11 @@ h3 {
 float:right;
 width:80%;
 }
+footer{
+  margin-top:350px;
+  bottom: 0;
+  width:100%
+}
 </style>
 </head>
 <body>
@@ -561,7 +566,7 @@ width:80%;
                    </div>
                </div>
                </div>
-               <div style="margin-top: 30px; text-align: center;">
+               <div style="margin-top: 30px; margin-bottom: 20px; text-align: center;">
                    <input type="submit" class="btn btn-danger" value="수정" />
                    <button type="button" class="btn btn-danger" onclick="location.href='/';">취소</button>
                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">탈퇴</button>
@@ -571,7 +576,8 @@ width:80%;
             <!-- 여기까지 오른쪽 컨텐츠 -->
          </div>
       </div>
-   </main>   
+   </main>
+   <footer><%@ include file="../../template/footer.jsp"%></footer>   
    <script>
       let code = "";   // 이메일 인증코드
       

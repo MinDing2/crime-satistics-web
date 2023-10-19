@@ -237,7 +237,7 @@ td {
 }
 
 footer{
-  position: fixed;
+  margin-top:250px;
   bottom: 0;
   width:100%
 }
@@ -508,7 +508,7 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 			var tel = telElement.text();
 			telElement.text(formatPhoneNumber(tel));
 
-			$('.btninfo').on('click', function() {
+			$('#btn').on('click', function() {
 				location.href = '/member/mypage/modify';
 			});
 			

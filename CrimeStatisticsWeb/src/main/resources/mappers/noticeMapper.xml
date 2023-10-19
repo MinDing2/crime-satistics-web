@@ -18,7 +18,7 @@
 		#{title},
 		#{cont},
 		#{writer},
-		SYSDATE + #{enddate}
+		#{enddate}
 		)
 	</insert>
 
@@ -71,7 +71,7 @@
 		UPDATE NOTICE
 		SET TITLE = #{ title }
 		, CONT = #{ cont }
-		, ENDDATE = SYSDATE + #{enddate}
+		, ENDDATE = #{enddate}
 		WHERE NBNUM = #{ nbnum }
 	</update>
 

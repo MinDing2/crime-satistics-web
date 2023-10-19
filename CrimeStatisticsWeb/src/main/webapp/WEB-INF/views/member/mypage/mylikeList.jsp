@@ -509,7 +509,7 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 		    var tel = telElement.text();
 		    telElement.text(formatPhoneNumber(tel));
 		    
-		    $('.btninfo').on('click', function() {
+		    $('#btn').on('click', function() {
 		    	location.href = '/member/mypage/modify';
 		    });
 		    

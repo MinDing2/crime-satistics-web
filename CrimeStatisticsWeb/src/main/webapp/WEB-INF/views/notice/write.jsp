@@ -217,7 +217,7 @@ footer{
 	        </tr>
 	        <tr>
 	          <th>마감기간</th>
-	          <td><input type="number" class= "form-control" name="enddate" min=1 value=1 /></td>
+	          <td><input type="date" class= "form-control" name="enddate" /></td>
 	        </tr>
 	        <tr>
 	          <th>글쓴이</th>

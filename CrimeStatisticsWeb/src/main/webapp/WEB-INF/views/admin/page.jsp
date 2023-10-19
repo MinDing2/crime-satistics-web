@@ -154,7 +154,7 @@ footer{
       <div class="wrap" style="flex: 1;">
          <div class="grayContainer" style="display: flex; justify-content: center; align-items: center;">
              <div>
-                 <div class="name" style="text-align: center;">MY페이지</div>
+                 <div class="name" style="text-align: center;">관리자 페이지</div>
              </div>
          </div>     
          
@@ -198,12 +198,8 @@ footer{
          <div class="grayContainer">
             <div class="name" style="display: flex; justify-content: space-between;">
                <div class="left" style="display: flex; align-items: center;">                  
-                  <div style="font-weight: normal; margin-left: 5px;">관리자 페이지입니다</div>
-               </div>
-               <div class="right" style="display: flex; align-items: center; margin-left: 200px; font-weight: normal; font-size: 15px;">
-                  <div>${member.tel} / ${member.email}</div>
-                  <button type="button" class="btn">회원정보수정</button>
-               </div>
+                  <div style="font-weight: normal; margin-left: 0 auto; text-align: center;">어서오세요!! CSW 관리자님</div>
+               </div>               
             </div>
             <!-- 여기에 콘텐츠 넣어보자 -->
          </div>

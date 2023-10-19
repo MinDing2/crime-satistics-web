@@ -511,7 +511,7 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 		    telElement.text(formatPhoneNumber(tel));
 		    
 		    // 회원정보수정 버튼
-		    $('.btninfo').on('click', function() {
+		    $('#btn').on('click', function() {
 		    	location.href = '/member/mypage/modify';
 		    });
 		    

@@ -496,7 +496,7 @@ footer {
 		    var tel = telElement.text();
 		    telElement.text(formatPhoneNumber(tel));
 		    
-		    $('.btn').on('click', function() {
+		    $('#btn').on('click', function() {
 		    	location.href = '/member/mypage/modify';
 		    });
 		    
