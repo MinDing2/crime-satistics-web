@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.answer.service.AnswerService;
 import com.spring.answer.vo.AnswerVo;
@@ -61,6 +62,7 @@ public class QuestionController {
 		
 		model.addAttribute("memberid", memberid);
 		model.addAttribute("nickname", findMember.getNickname());
+		
 		return "question/write";
 	}
 	
@@ -83,6 +85,7 @@ public class QuestionController {
 		
 		QuestionVo vo = questionService.view(question_id);
 	    String nickname = (String)session.getAttribute("nickname");
+	    String memberid = (String)session.getAttribute("memberid");
 	    
 		//
 		model.addAttribute("view", vo);
@@ -92,6 +95,7 @@ public class QuestionController {
 		answer = answerService.list(question_id);
 		model.addAttribute("answer", answer);
 		model.addAttribute("nickname", nickname);
+		model.addAttribute("memberid", memberid);
 	}
 	
 	//수정
@@ -122,21 +126,21 @@ public class QuestionController {
 	public String getDelete(@RequestParam("question_id") int question_id, HttpSession session, HttpServletRequest request) {
 		
 		String memberid = (String)session.getAttribute("memberid");
-		
         QuestionVo vo   =  questionService.view(question_id);
+        
 		if(memberid == null) {
 			request.setAttribute("msg", "회원만 가능합니다.");
 			request.setAttribute("url", "/question/view?question_id=" + vo.getQuestion_id());
 			return "question/alert";
 		}
- 
-		questionService.delete(question_id);
-		
+	
+		//수정 memberid값 받아야됨 
+		questionService.delete(question_id, memberid);
 		
 		return "redirect:/question/listPageSearch?num=1";
 	}
 	
-	//
+	//리스트 페이징
 	@GetMapping("/listPage")
 	public void getListPage(Model model, @RequestParam("num") int num){
 		
@@ -148,14 +152,42 @@ public class QuestionController {
 
 		List<QuestionVo> list = null; 
 		list = questionService.listPage(page.getDisplayPost(), page.getPostNum());
-
+		
 		model.addAttribute("list", list);   
 		model.addAttribute("page", page);
 		model.addAttribute("select", num);		
 	}
 	
+	//관리자 페이지 답변 리스트 페이징 설치 
+	@GetMapping("/adminListPageSearch")
+	public void getadminListPage(Model model, @RequestParam("num") int num,
+				 @RequestParam(value = "searchType",required = false, defaultValue = "title") String searchType,
+				 @RequestParam(value = "keyword",required = false, defaultValue = "") String keyword
+			){
+		 //paging
+		Page page = new Page();
+		
+		
+		page.setNum(num);
+		page.setCount(questionService.searchCount(searchType, keyword));
+		
+		page.setSearchType(searchType); 
+		page.setKeyword(keyword);
+		//질문 목록
+		List<QuestionVo> list = null; 
+		list = questionService.adminListPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+		//답변 여부 
+		//int a = answerService.answerWhether(question_id);
+		
+	//	model.addAttribute("a", a); 
+		
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);
+		model.addAttribute("select", num); 
 	
-	//
+	}
+	
+	// 리스트 페이징 + 서치 
 	@RequestMapping(value = "/listPageSearch", method = RequestMethod.GET)
 	public void getListPageSearch(
 			Model model, @RequestParam("num") int num, 
@@ -179,6 +211,7 @@ public class QuestionController {
 	 model.addAttribute("page", page);
 	 model.addAttribute("select", num);
 	}
+	
 }
 
 

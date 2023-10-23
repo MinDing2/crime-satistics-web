@@ -158,7 +158,7 @@
 					<div>
 						<form method="GET" name="form" style="display: inline-block;">
 							<input type="hidden" name="menu_id" value="${vo.menu_id}">
-							<a href="/question/writeform" id="main" class="btn btn-danger">새글쓰기</a>
+							<a href="/question/writeform" id="main" class="btn btn-danger">질문 작성</a>
 						</form>
 						<a href="/" id="main" class="btn btn-danger ml-2">메인</a>
 					</div>

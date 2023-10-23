@@ -74,7 +74,9 @@ border-bottom:2px solid #0F3A5F;
     </div>
     <div style="margin:15px;">
     <a href="/" class="btn btn-danger">메인화면으로</a>
+    
     <a href="javascript:history.back()" class="btn btn-danger">이전으로</a>
+    
     </div>
      </main>   
         <footer style="margin-top: 150px;"><%@ include file="../template/footer.jsp"%></footer>

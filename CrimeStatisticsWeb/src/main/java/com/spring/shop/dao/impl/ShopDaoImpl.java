@@ -198,4 +198,14 @@ public class ShopDaoImpl implements ShopDao {
 		return sqlSession.selectList(namespace + ".showPointDate", map);
 	}
 
+	
+	// 상품재고수정
+	@Override
+	public void modifyStock(int pdNum, int pdStock) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("pdNum", pdNum);
+		map.put("pdStock", pdStock);
+		sqlSession.update(namespace + ".modifyStock", map);
+	}
+
 }

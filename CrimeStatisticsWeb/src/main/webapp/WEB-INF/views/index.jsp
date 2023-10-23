@@ -100,7 +100,7 @@ color:#0F3A5F;
 <body style="height: 100vh;">
    <header><%@ include file="template/header.jsp"%></header>
   <div class="row">
-    <!-- 왼쪽 열: 지도 -->ㄴ
+    <!-- 왼쪽 열: 지도 -->
     <div class="col-md-6"  style="width: 611px; height:900px; margin-left: 12%; margin-bottom: 0%; margin-top:0">
       <div class="svg-container" style="width:700px; height: 900px;  margin-top: 0">
         <object id= "mapSvg "data="/img/southKoreaHigh.svg" width="100%" height="100%"></object>

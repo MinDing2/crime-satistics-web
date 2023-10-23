@@ -1,4 +1,4 @@
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -124,14 +124,6 @@ div {
    margin-top: 60px;
 }
 
-.btninfo {
-    background-color: transparent !important;
-    border-color: white !important;
-    color: white !important;
-    font-size: 13px !important;
-    margin-left: 30px;
-}
-
 /* listGroupTitle에 스타일 추가 */
 .listGroupTitle {
   background-color: #333; /* 배경색 설정 */
@@ -140,16 +132,24 @@ div {
   font-weight: bold; /* 폰트 굵기 설정 */
   font-size: 20px;
 }
+tbody tr td {
+    vertical-align: middle; /* 세로 가운데 정렬 */
+}
+footer{
+  position: absolute;
+  bottom: 0;
+  width:100%
+}
 </style>
 </head>
 <body>
-   <header><%@ include file="../template/header.jsp"%></header>
+   <header><%@ include file="../../template/header.jsp"%></header>
 
    <main style="display: flex; width: 65%; margin: 0 auto;">
       <div class="wrap" style="flex: 1;">
          <div class="grayContainer" style="display: flex; justify-content: center; align-items: center;">
              <div>
-                 <div class="name" style="text-align: center;">MY페이지</div>
+                 <div class="name" style="text-align: center;">관리자 페이지</div>
              </div>
          </div>     
          
@@ -158,10 +158,16 @@ div {
 		    <div class="listGroupTitle">상품</div>
 		    <a href="/admin/products/register" class="item">		      
 		      <div class="text">상품등록</div>		      
-		    </a>		    
+		    </a>
+		    <!-- 
+		    <a href="#" class="item">		      
+		      <div class="text">상품후기</div>		      
+		    </a>
+		     -->
 		    <a href="/admin/products/manage" class="item">		      
 		      <div class="text">상품재고관리</div>		      
 		    </a>
+		    
 		  </div>		  
 		  <div class="listGroup">
 		    <div class="listGroupTitle">메뉴</div>
@@ -172,14 +178,15 @@ div {
 		      <div class="text">게시판 카테고리조회</div>		      
 		    </a>
 		  </div>
+		  
+		  <!-- Q & A 조회 추가 일단 num 안받고 리스트만 받기-->
+				<div class="listGroup">
+					<div class="listGroupTitle">Q&A</div>
+					<a href="/question/adminListPageSearch?num=1" class="item">
+						<div class="text">Q&A 조회</div>
+					</a>
+				</div>
 		  		  
-		  <div class="listGroup">
-             <div class="listGroupTitle">Q&A</div>
-             <a href="/question/adminListPageSearch?num=1" class="item">
-                <div class="text">Q&A 조회</div>
-             </a>
-          </div>
-            
 		  <div class="listGroup">
 		    <div class="listGroupTitle">공지사항</div>
 		    <a href="/notice/writeform" class="item">		      
@@ -197,52 +204,70 @@ div {
          <div class="grayContainer">
             <div class="name" style="display: flex; justify-content: space-between;">
                <div class="left" style="display: flex; align-items: center;">                  
-                  <div style="font-weight: normal; margin-left: 5px;">어서오세요!! CSW 관리자님</div>
-               </div>              
-            </div>           
+                  <div style="font-weight: normal; margin-left: 0 auto; text-align: center;">어서오세요!! CSW 관리자님</div>
+               </div>               
+            </div>
+            
          </div>
-          <!-- 여기에 콘텐츠 넣어보자 -->
-            <div>
-			   <h2 class="community-title" style="text-align: center; margin-top: 30px;">메뉴 등록</h2>
-			   <div class="container">
-			      <form action="/menus/write" method="POST">
-			         <div class="main-content">
-			            <table class="table table-bordered">
-			               <tbody>
-			                  <tr>
-			                     <td class="font-weight-bold">메뉴 이름</td>
-			                     <td><input type="text" name="menu_name" class="form-control" /></td>
-			                  </tr>
-			                  <tr>
-			                     <td class="font-weight-bold">메뉴 카테고리</td>
-			                     <td><input type="number" name="menu_cate" class="form-control" min="1" max="2" /></td>
-			                  </tr>
-			                  <tr>
-			                     <td colspan="2" class="text-center">
-			                        <input id="write" type="submit" class="btn btn-danger" value="등록" />
-			                     </td>
-			                  </tr>
-			               </tbody>
-			            </table>
-			         </div>
-			      </form>
-			      <div class="text-center">
-			         <a href="/menus/list" class="btn btn-secondary">메뉴 목록으로 가기</a>
-			         <a href="/admin/page" class="btn btn-secondary">관리자 페이지로 가기</a>
-			      </div>
-			   </div>
-			</div>
+         <div style="margin-top: 30px; text-align: center; margin-bottom: 30px;">
+         	<h1>상품재고관리</h1>
+         </div>
+         <div>
+         	<table class="table table-hover">
+					<thead class="thead-dark">
+						<tr style="font-size: 20px; text-align: center;">
+							<th>상품 이름</th>
+							<th></th>
+							<th>상품 가격</th>
+							<th>재고</th>
+							<th>수정</th>
+						</tr>
+					</thead>
+					<tbody style="font-size: 18px;">
+						<c:forEach var="pd" items="${pdList}">
+							<tr>
+								<input type="hidden" value="${pd.pdNum}">
+								<td>${pd.pdName}</td>
+								<td><img src="${pd.pdThumbImg}" width="100" height="100" /></td>
+								<td style="text-align: center;">${pd.pdPrice}</td>
+								<td style="text-align: center; width: 100px;"><input type="number" value="${pd.pdStock}" ></td>
+								<td style="text-align: center;"><button type="button" class="btn btn-danger pdStock-modify">수정</button></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+         </div>
       </div>
    </main>
 
-   <footer><%@ include file="../template/footer.jsp"%></footer>
+   <footer><%@ include file="../../template/footer.jsp"%></footer>
    
-   <script>   
-      
-      function formatPhoneNumber(phoneNumber) {
-          return phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-      }
-    
+   <script>
+      $(document).ready(function() {
+    	  $('.pdStock-modify').on('click', function() {
+    		  var pdNum = $(this).closest('tr').find('input[type=hidden]').val();
+    		  var pdStock = $(this).closest('tr').find('input[type=number]').val();
+
+    		  var confirmResult = confirm('정말 재고를 수정하시겠습니까?');
+    		  
+    		  if (confirmResult) {
+    	            $.ajax({
+    	                url: '/shop/product/stock/modify',
+    	                type: 'POST',
+    	                data: {
+    	                    pdNum: pdNum,
+    	                    pdStock: pdStock
+    	                },
+    	                success: function() {
+    	                    location.href = '/admin/products/manage';
+    	                },
+    	                error: function() {
+    	                    alert('재고수정 에러 발생');
+    	                }
+    	            });
+    	        }
+    	  });
+      })
    </script>
 </body>
 </html>

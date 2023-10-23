@@ -43,14 +43,15 @@
    			 set 
        			 question_title   = #{question_title},
         		 question_content = #{question_content}
-   			 where question_id    = #{question_id}
+   			 where question_id    = #{question_id} 
 	</update>
 	
 	<!-- 질문 삭제 -->
-	<delete id = "delete" parameterType="int">
+	<delete id = "delete" parameterType="hashMap">
 		delete
-			from question
-		where question_id = #{question_id}
+			from question  
+			where 
+			question_id = #{question_id} and memberid = #{memberid} 
 	</delete>
 	
 	<!-- 질문 총 개수 -->
@@ -104,8 +105,39 @@
     	OFFSET #{displayPost} ROWS
     	FETCH FIRST #{postNum} ROWS ONLY
 	</select>
-		
 	
+	<!-- 관리자 Q&A 페이징 서치 리스트 -->
+	<select id= "adminListPageSearch" parameterType="hashMap" resultType="com.spring.question.vo.QuestionVo">
+	select 
+		question_id,
+		question_title, 
+		create_date, 
+		m.nickname,
+	    (select count(answer_id) from answer where question_id = q.question_id) as answerCheck
+	from question q
+	inner join member m on q.memberid = m.memberid
+	
+	<if test='searchType.equals("question_title")'>
+		WHERE question_title like '%' || #{keyword} || '%'
+	</if>
+	
+	<if test='searchType.equals("question_content")'>
+		WHERE question_title like '%' || #{keyword} || '%'
+	</if>
+	
+	<if test='searchType.equals("title_content")'>
+		WHERE question_title like '%' || #{keyword} || '%'
+			or question_content like '%' || #{keyword} || '%'
+	</if>
+	
+	<if test='searchType.equals("m.nickname")'>
+		WHERE m.nickname like '%' || #{keyword} || '%'
+	</if>
+	
+	ORDER BY question_id DESC
+    	OFFSET #{displayPost} ROWS
+    	FETCH FIRST #{postNum} ROWS ONLY
+	</select>
 
 	<!-- 질문 총 갯수 + 검색 적용 -->
 	<select id="searchCount" parameterType="hashMap"
@@ -130,6 +162,7 @@
 			WHERE m.nickname like '%' || #{keyword} || '%'
 		</if>
 	</select>
+	
 	
 	<!-- 마이페이지 질문 개수 -->
 	<select id="questionCnt" parameterType = "hashMap" resultType = "int">

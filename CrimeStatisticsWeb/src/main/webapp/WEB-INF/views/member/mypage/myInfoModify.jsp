@@ -479,8 +479,8 @@ footer{
 				         <div style="display: flex; justify-content: space-between; align-items: center;">
 				               <div>작성 질문</div>
 				               <div style="margin-right: 20px;">
-				                <a href="/member/mypage/myanswer" class="splita">
-				                		<span style="color: red; font-weight: bold;">${questionCnt} </span>건
+				                <a href="/member/mypage/myanswer?num=1" class="splita">
+									<span style="color: red; font-weight: bold;">${questionCnt} </span>건
 				               	</a>
 				              </div>
 				            </div>
@@ -566,7 +566,7 @@ footer{
                    </div>
                </div>
                </div>
-               <div style="margin-top: 30px; margin-bottom: 20px; text-align: center;">
+               <div style="margin-top: 30px; text-align: center;">
                    <input type="submit" class="btn btn-danger" value="수정" />
                    <button type="button" class="btn btn-danger" onclick="location.href='/';">취소</button>
                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">탈퇴</button>

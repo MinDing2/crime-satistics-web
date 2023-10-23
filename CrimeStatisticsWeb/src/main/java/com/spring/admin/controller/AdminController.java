@@ -94,6 +94,14 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
+	// 상품재고관리 페이지
+	@GetMapping("/products/manage")
+	public String getPdManage(Model model) {
+		List<ProductVo> pdList = shopService.allPdList();
+		model.addAttribute("pdList", pdList);
+		return "admin/products/pdManage";
+	}
+	
 	// 상품 상세조회
 	@GetMapping("/products/view")
 	public String getProduct(Model model, @RequestParam("n") int pdNum) {

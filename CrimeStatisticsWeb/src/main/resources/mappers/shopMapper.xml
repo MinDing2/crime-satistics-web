@@ -186,4 +186,11 @@
 		WHERE p.pointDate BETWEEN #{startDate} AND #{endDate} AND p.memberid = #{memberid}
 		ORDER BY p.pointid DESC
 	</select>
+	
+	<!-- 상품재고수정 -->
+	<update id="modifyStock" parameterType="hashMap">
+		UPDATE products
+		SET pdStock = #{pdStock}
+		WHERE pdNum = #{pdNum}
+	</update>
 </mapper>

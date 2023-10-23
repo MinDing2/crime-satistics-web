@@ -168,4 +168,11 @@ public class ShopRestController {
 		
 		return "complete";
 	}
+	
+	// 상품재고수정
+	@PostMapping("/product/stock/modify")
+	public void modifyStock(@RequestParam("pdNum") int pdNum, @RequestParam("pdStock") int pdStock) {
+		
+		shopService.modifyStock(pdNum, pdStock);
+	}
 }

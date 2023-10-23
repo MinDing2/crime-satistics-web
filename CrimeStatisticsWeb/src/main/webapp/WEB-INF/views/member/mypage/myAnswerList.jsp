@@ -287,7 +287,7 @@ h3 {
 	color: black;
 }
 footer{
-  margin-top:200px;
+  position: fixed;
   bottom: 0;
   width:100%
 }
@@ -504,8 +504,8 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 				            <div style="display: flex; justify-content: space-between; align-items: center;">
 				                <div>작성 질문</div>
 				                <div style="margin-right: 20px;">
-				                	<a href="/member/mypage/myanswer" class="splita">
-				                		<span style="color: red; font-weight: bold;"> ${questionCnt} </span>건
+				                	<a href="/member/mypage/myanswer?num=1" class="splita">
+										<span style="color: red; font-weight: bold;">${questionCnt} </span>건
 				                	</a>
 				                </div>
 				            </div>
@@ -514,7 +514,9 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 				        
 				    </ul>
 			    </div>
-			</div>			
+			</div>
+			
+			
 			<div class="verticalSplit">
 			    <!-- 여기에 콘텐츠 넣어보자 -->         
 		        <!-- 게시물 목록 -->

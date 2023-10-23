@@ -43,6 +43,7 @@ import com.spring.question.service.QuestionService;
 import com.spring.question.vo.Page2;
 import com.spring.question.vo.QuestionVo;
 import com.spring.shop.service.ShopService;
+import com.spring.shop.vo.PointVo;
 
 @Controller
 @RequestMapping("/member")
@@ -343,6 +344,7 @@ public class MemberController {
 
 		String memberid = (String) session.getAttribute("memberid");
 		String nickname = (String) session.getAttribute("nickname");
+		List<PointVo> pointList = shopService.getPointList(memberid);
 
 		// 장바구니 담은 갯수
 		model.addAttribute("cartCnt", shopService.getCartList(memberid).size());
@@ -360,6 +362,7 @@ public class MemberController {
 		model.addAttribute("reviewCnt", shopService.getReviewList(memberid).size());
 		// 포인트 내역
 		model.addAttribute("pointList", shopService.getPointList(memberid));
+		System.out.println(pointList);
 		// 질문개수  수정 완료
 		model.addAttribute("questionCnt", questionService.questionCnt(memberid, nickname));
 	

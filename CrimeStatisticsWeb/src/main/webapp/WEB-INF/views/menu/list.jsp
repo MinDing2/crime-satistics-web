@@ -158,11 +158,8 @@ div {
 		    <div class="listGroupTitle">상품</div>
 		    <a href="/admin/products/register" class="item">		      
 		      <div class="text">상품등록</div>		      
-		    </a>
-		    <a href="#" class="item">		      
-		      <div class="text">상품후기</div>		      
-		    </a>
-		    <a href="#" class="item">		      
+		    </a>		    
+		    <a href="/admin/products/manage" class="item">		      
 		      <div class="text">상품재고관리</div>		      
 		    </a>
 		  </div>		  
@@ -175,7 +172,14 @@ div {
 		      <div class="text">게시판 카테고리조회</div>		      
 		    </a>
 		  </div>
-		  		  
+		  
+		  <div class="listGroup">
+             <div class="listGroupTitle">Q&A</div>
+             <a href="/question/adminListPageSearch?num=1" class="item">
+                <div class="text">Q&A 조회</div>
+             </a>
+          </div>
+            
 		  <div class="listGroup">
 		    <div class="listGroupTitle">공지사항</div>
 		    <a href="/notice/writeform" class="item">		      
@@ -189,16 +193,12 @@ div {
       </div>
 
       <!-- 오른쪽 콘텐츠 영역 -->      
-      <div class="rightArea" style="flex: 4; margin-bottom: 30px;">
+      <div class="rightArea" style="flex: 4;">
          <div class="grayContainer">
             <div class="name" style="display: flex; justify-content: space-between;">
                <div class="left" style="display: flex; align-items: center;">                  
-                  <div style="font-weight: normal; margin-left: 5px;">관리자 페이지입니다</div>
-               </div>
-               <div class="right" style="display: flex; align-items: center; margin-left: 200px; font-weight: normal; font-size: 15px;">
-                  <div>${member.tel} / ${member.email}</div>
-                  <button type="button" class="btninfo">회원정보수정</button>
-               </div>
+                  <div style="font-weight: normal; margin-left: 5px;">어서오세요!! CSW 관리자님</div>
+               </div>              
             </div>           
          </div>
          
@@ -224,7 +224,7 @@ div {
 						<c:forEach var="menu" items="${menuList}">
 							<tr>
 								<td>${menu.menu_id}</td>
-								<td><a href="/menus/view?menu_id=${menu.menu_id}">${menu.menu_name}</a></td>
+								<td><a href="/board/listsearch?menu_id=${menu.menu_id}">${menu.menu_name}</a></td>
 								<td><c:choose>
 										<c:when test="${menu.menu_cate == 1}">자유</c:when>
 										<c:when test="${menu.menu_cate == 2}">지역</c:when>

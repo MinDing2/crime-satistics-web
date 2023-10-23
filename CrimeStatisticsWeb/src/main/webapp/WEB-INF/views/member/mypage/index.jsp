@@ -230,7 +230,7 @@ div {
 	margin-top: 60px;
 }
 
-.btn {
+#btn {
     background-color: transparent !important;
     border-color: white !important;
     color: white !important;
@@ -488,8 +488,8 @@ font-family: 'IBM Plex Sans KR', sans-serif;
 				            <div style="display: flex; justify-content: space-between; align-items: center;">
 				                <div>작성 질문</div>
 				                <div style="margin-right: 20px;">
-				                	<a href="/member/mypage/myanswer" class="splita">
-				                		<span style="color: red; font-weight: bold;"> ${questionCnt} </span>건
+				                	<a href="/member/mypage/myanswer?num=1" class="splita">
+										<span style="color: red; font-weight: bold;">${questionCnt} </span>건
 				                	</a>
 				                </div>
 				            </div>

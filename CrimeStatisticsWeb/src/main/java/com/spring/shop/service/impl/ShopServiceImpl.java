@@ -193,4 +193,10 @@ public class ShopServiceImpl implements ShopService {
 		return shopDao.showPointDate(startDate, endDate, memberid);
 	}
 
+	// 상품재고수정
+	@Override
+	public void modifyStock(int pdNum, int pdStock) {
+		shopDao.modifyStock(pdNum, pdStock);
+	}
+
 }

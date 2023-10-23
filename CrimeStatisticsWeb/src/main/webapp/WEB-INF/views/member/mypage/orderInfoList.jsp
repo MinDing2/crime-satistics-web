@@ -163,7 +163,7 @@ div {
 	margin-top: 60px;
 }
 
-.btn {
+#btn {
     background-color: transparent !important;
     border-color: white !important;
     color: white !important;
@@ -345,7 +345,7 @@ footer {
 					</div>
 					<div class="right" style="display: flex; align-items: center; margin-left: 200px; font-weight: normal; font-size: 15px;">
 						<div>${member.tel} / ${member.email}</div>
-						<button type="button" class="btn">회원정보수정</button>
+						<button type="button" id="btn"class="btn">회원정보수정</button>
 					</div>
 				</div>
 			</div>
@@ -448,8 +448,8 @@ footer {
 				            <div style="display: flex; justify-content: space-between; align-items: center;">
 				                <div>작성 질문</div>
 				                <div style="margin-right: 20px;">
-				                	<a href="/member/mypage/myanswer" class="splita">
-				                		<span style="color: red; font-weight: bold;">${questionCnt} </span>건
+				                	<a href="/member/mypage/myanswer?num=1" class="splita">
+										<span style="color: red; font-weight: bold;">${questionCnt} </span>건
 				                	</a>
 				                </div>
 				            </div>

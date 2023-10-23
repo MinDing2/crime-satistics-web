@@ -41,6 +41,8 @@
 <body>
 	<%
 		String adminid = (String) session.getAttribute("adminid"); // adminid를 세션에서 가져옴
+		String memberid = (String) session.getAttribute("memberid");
+		
 	%>
 	<header><%@ include file="../template/header.jsp"%></header>	
 	<main class="container mt-5" style="margin:0 auto 50px;  width:900px;">
@@ -70,11 +72,13 @@
 		</div>
 		
 		<!-- 섹션 간에 선 추가 -->
+		<c:if test="${sessionScope.nickname eq view.nickname}">
 		<div class="mb-3">
             <a class="btn btn-primary" href="/question/modify?question_id=${view.question_id}">수정</a>
             <a class="btn btn-danger" href="/question/delete?question_id=${view.question_id}">삭제</a>
-        </div>	
-        
+       	</div>
+        </c:if>
+       
          <% if (adminid != null) { %>
 			<hr style="border: 1px solid  #000000;">
 			<h3 style="margin-top: 20px;">답변</h3>
@@ -88,6 +92,7 @@
 	
 	<!-- 답변 작성한 거 표시 -->
       <main class="container mt-5" style="margin:0 auto 50px;  width:900px;">      
+      <c:if test="${sessionScope.nickname eq view.nickname || sessionScope.adminid ne null }">
         <c:forEach items="${answer}" var="answer">
          <div class="container mt-4 answer-section">
             <hr>
@@ -108,10 +113,11 @@
                   	  <span id="answer_cont_" contenteditable="false">${answer.answer_cont}</span>   					
    				<!-- 	-->
    					 <br>
-   					 <button type="button" class="btn btn-primary editBtn"    data-answer-id="${answer.answer_id}" >수정</button>
-                     <button type="button" class="btn btn-success confirmBtn" data-answer-id="${answer.answer_id}" style="display: none;">확인</button>
-                     <a type="button" class="btn btn-danger" href="/answer/delete?answer_id=${answer.answer_id}&question_id=${answer.question_id}">삭제</a>
-   
+   					 <c:if test = "${sessionScope.adminid ne null }">
+   						 <button type="button" class="btn btn-primary editBtn"    data-answer-id="${answer.answer_id}" >수정</button>
+                    	 <button type="button" class="btn btn-success confirmBtn" data-answer-id="${answer.answer_id}" style="display: none;">확인</button>
+                    	 <a type="button" class="btn btn-danger" href="/answer/delete?answer_id=${answer.answer_id}&question_id=${answer.question_id}">삭제</a>
+   					 </c:if>
                 <!-- <button type="button" class="btn btn-danger cancelBtn"   data-answer-id="${answer.answer_id}" style="display: none;">취소</button> -->
                </div>
                 <!-- 삭제
@@ -120,7 +126,7 @@
             </div>
        </div>
         </c:forEach>
-
+	</c:if>
         <!-- 답변 폼 -->
         <form method="post" action="/answer/writewAnswer" class="mb-5" style = "margin-top:0;">
        	
