@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="imaga/x-icon" href="/img/favicon.ico">
-<link href="/css/star.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -35,6 +34,41 @@ hr {
     flex-shrink: 0;
     margin-left: 10px; /* 원하는 간격으로 조정하세요 */
 }
+#myform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#myform fieldset legend{
+    text-align: left;
+}
+#myform input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+#myform label{
+    font-size: 3em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+#myform label:hover{
+    text-shadow: 0 0 0 #ffa500; /* 마우스 호버 */
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 #ffa500; /* 마우스 호버 뒤에오는 이모지들 */
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #ffa500; /* 마우스 클릭 체크 */
+}
+#reviewContents {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}
 
 footer {
 	margin-top: 90px;
@@ -49,7 +83,7 @@ footer {
 	        <img src="${product.pdThumbImg}" style="margin-left: 0px; margin-right: 0px; max-width: 150px; max-height: 150px;">
 	        <div style="text-align: left; margin-left: 40px;">
 	            <div style="font-size: 25px; font-weight: bold; margin-top: 10px;">${product.pdName}</div>
-	            <div style="font-size: 20px; font-weight: bold;">${product.pdPrice}원</div>
+	            <div style="font-size: 20px; font-weight: bold;"><span class="pdPrice">${product.pdPrice}</span>원</div>
 	        </div>
 	    </div>
 	    <hr>
@@ -58,12 +92,12 @@ footer {
 			<input type="hidden" name="pdNum" value="${product.pdNum}" />
 			<div style="text-align: center;">
 			    <div style="font-size: 35px; color: #dc3545; font-weight: bold;">상품은 만족하셨나요?</div>
-			    <fieldset style="display: inline-block;">
-			        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">★</label>
-			        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">★</label>
-			        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">★</label>
-			        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">★</label>
-			        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">★</label>
+			    <fieldset>
+			        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+			        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+			        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+			        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+			        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
 			    </fieldset>
 			</div>
 			<div style="margin-top: 30px;">
@@ -96,5 +130,16 @@ footer {
 	</main>
 	
 	<footer><%@ include file="../template/footer.jsp"%></footer>
+	
+	<script>
+		$(document).ready(function() {
+			// 쉼표 추가
+			function addCommasToNumber(number) {
+			    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+			
+			$('.pdPrice').text(addCommasToNumber($('.pdPrice').text()));
+		})
+	</script>
 </body>
 </html>

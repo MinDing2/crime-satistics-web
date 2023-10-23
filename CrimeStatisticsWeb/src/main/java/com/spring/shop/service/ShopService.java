@@ -88,7 +88,7 @@ public interface ShopService {
 	List<PointVo> getPointList(String memberid);
 
 	// 포인트 내역 기간 조회
-	List<PointVo> showPointDate(Date startDate, Date endDate, String memberid);
+	List<PointVo> showPointDate(String startDate, String endDate, String memberid);
 
 	// 상품재고수정
 	void modifyStock(int pdNum, int pdStock);

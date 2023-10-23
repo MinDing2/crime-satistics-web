@@ -43,7 +43,6 @@ import com.spring.question.service.QuestionService;
 import com.spring.question.vo.Page2;
 import com.spring.question.vo.QuestionVo;
 import com.spring.shop.service.ShopService;
-import com.spring.shop.vo.PointVo;
 
 @Controller
 @RequestMapping("/member")
@@ -107,8 +106,8 @@ public class MemberController {
 
 		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=6m11DUsaOAlewAFPEIgU&
 		// redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fmember%2Fnaver-login%2Fcallback&state=1f5213be-a0af-490f-b4fd-73ac54758bd3
-		System.out.println("네이버:" + naverAuthUrl);
-		System.out.println("구글:" + url);
+//		System.out.println("네이버:" + naverAuthUrl);
+//		System.out.println("구글:" + url);
 
 		// 네이버
 		model.addAttribute("url", naverAuthUrl);
@@ -344,7 +343,6 @@ public class MemberController {
 
 		String memberid = (String) session.getAttribute("memberid");
 		String nickname = (String) session.getAttribute("nickname");
-		List<PointVo> pointList = shopService.getPointList(memberid);
 
 		// 장바구니 담은 갯수
 		model.addAttribute("cartCnt", shopService.getCartList(memberid).size());
@@ -362,7 +360,6 @@ public class MemberController {
 		model.addAttribute("reviewCnt", shopService.getReviewList(memberid).size());
 		// 포인트 내역
 		model.addAttribute("pointList", shopService.getPointList(memberid));
-		System.out.println(pointList);
 		// 질문개수  수정 완료
 		model.addAttribute("questionCnt", questionService.questionCnt(memberid, nickname));
 	
@@ -379,10 +376,10 @@ public class MemberController {
 		String memberid = (String) session.getAttribute("memberid");
 		String nickname = (String) session.getAttribute("nickname");
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-		Date stDate = dateFormat.parse(startDate);
-		Date edDate = dateFormat.parse(endDate);
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
+//		Date stDate = dateFormat.parse(startDate);
+//		Date edDate = dateFormat.parse(endDate);
 
 		// 장바구니 담은 갯수
 		model.addAttribute("cartCnt", shopService.getCartList(memberid).size());
@@ -399,7 +396,7 @@ public class MemberController {
     	// 리뷰 갯수
     	model.addAttribute("reviewCnt", shopService.getReviewList(memberid).size());
 		// 포인트 내역 기간 조회
-    	model.addAttribute("pointList", shopService.showPointDate(stDate, edDate, memberid));
+    	model.addAttribute("pointList", shopService.showPointDate(startDate, endDate, memberid));
     	// 질문개수  수정 완료
     	model.addAttribute("questionCnt", questionService.questionCnt(memberid, nickname));
 	

@@ -578,8 +578,12 @@ td {
 		        var accumulatePointTd = $(this).children('td:eq(2)');
 		        var firstSpan = accumulatePointTd.find('span:eq(0)');
 		        var secondSpan = accumulatePointTd.find('span:eq(1)');
-		        var afPointElement = $(this).find('td:eq(3)').text();
-		        $('.afPoint').text(addCommasToNumber(afPointElement));
+		        
+		        var afPointElement = $(this).children('td:eq(3)');
+		        var afPointText = afPointElement.text();
+		        afPointElement.text(addCommasToNumber(afPointText));
+		        //$('.afPoint').text(addCommasToNumber(afPointElement));
+		        
 		        
 		        // 첫 번째 <span> 내의 텍스트에서 쉼표 추가
 		        var firstSpanText = firstSpan.text();

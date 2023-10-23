@@ -139,15 +139,10 @@ div {
 }
 
 footer {
-	position: absolute;
+	margin-top: 40px;
 	bottom: 0;
 	width: 100%
 }
-
-
-
-
-
 
 </style>
 </head>
@@ -207,51 +202,20 @@ footer {
 		<!-- 오른쪽 콘텐츠 영역 -->
 		<div class="rightArea" style="flex: 4;">
 			<div class="grayContainer">
-				<div class="name"
-					style="display: flex; justify-content: space-between;">
-					<div class="left" style="display: flex; align-items: center;">
-						<div style="font-weight: normal; margin-left: 5px;">관리자
-							페이지입니다</div>
-					</div>
-					<div class="right"
-						style="display: flex; align-items: center; margin-left: 200px; font-weight: normal; font-size: 15px;">
-						<div>${member.tel}/ ${member.email}</div>
-						<button type="button" class="btn">회원정보수정</button>
-					</div>
-				</div>	
-			</div>
+            <div class="name" style="display: flex; justify-content: space-between;">
+               <div class="left" style="display: flex; align-items: center;">                  
+                  <div style="font-weight: normal; margin-left: 0 auto; text-align: center;">어서오세요!! CSW 관리자님</div>
+               </div>               
+            </div>
+          </div>
 			<!-- 여기에 콘텐츠 넣어보자 -->
 			
 		<!-- 제목 -->
-		<div class="container">
+		<div class="container" style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
 			<h2 class="community-title"> Q&A</h2>
 		</div>
-		
-	
-		
 		<!-- 정렬 버튼 -->
-		
 		<div class="container table-container">
-			<div class="container table-container">
-				<div class="d-flex justify-content-between align-items-center"
-					style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
-					<div class="form-group" style="width: 30%;">
-						<div class="custom-sort-links">
-							<a class="btn btn-sm btn-outline-dark sort-link"
-								href="/question/listsearch?menu_id=${vo.menu_id}&searchType=${scri.searchType}&keyword=${scri.keyword}&sort=bnum">최신순</a>
-						</div>
-					</div>
-					<!-- 버튼 -->
-					<div>
-						<form method="GET" name="form" style="display: inline-block;">
-							<input type="hidden" name="menu_id" value="${vo.menu_id}">
-							<a href="/question/writeform" id="main" class="btn btn-danger">질문 작성</a>
-						</form>
-						<a href="/" id="main" class="btn btn-danger ml-2">메인</a>
-					</div>
-				</div>
-			</div>
-			
 			<!-- 본문테이블 -->
 			<table class="table table-hover">			    
 				<thead>
@@ -261,11 +225,8 @@ footer {
 						<th scope="col" style="text-align: center;">제목</th>
 						<th scope="col" style="text-align: center;">글쓴이</th>
 						<th scope="col" style="text-align: center;">등록일</th>
-					
 					</tr>
 				</thead>	
-							
-			
 				
 				<!-- 게시물 -->
 				<tbody>
@@ -295,7 +256,7 @@ footer {
 			
 	
 			<%@ include file="include/adminSearchPaging2.jsp"%>
-
+		</div>
 	
 		</div>
 	</main>

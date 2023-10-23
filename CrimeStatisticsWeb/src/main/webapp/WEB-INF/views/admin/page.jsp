@@ -141,7 +141,7 @@ div {
   font-size: 20px;
 }
 footer{
-  position: absolute;
+  margin-top: 40px;
   bottom: 0;
   width:100%
 }

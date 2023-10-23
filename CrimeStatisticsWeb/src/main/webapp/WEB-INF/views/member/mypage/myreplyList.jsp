@@ -237,7 +237,7 @@ td {
 }
 
 footer{
-  position: fixed;
+  margin-top: 40px; 
   bottom: 0;
   width:100%
 }

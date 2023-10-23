@@ -146,7 +146,7 @@
 	
 	<!-- 전체 리뷰 가져오기 -->
 	<select id="getAllReviewList" resultType="com.spring.shop.vo.ReviewVo">
-		SELECT reviewid, memberid, pdNum, reviewText, reviewImg, rating, TO_CHAR(reviewDate, 'YYYY/MM/DD') AS reviewDATE
+		SELECT reviewid, memberid, pdNum, reviewText, reviewImg, rating, TO_CHAR(reviewDate, 'YYYY-MM-DD') AS reviewDATE
 		FROM reviews
 		WHERE pdNum = #{pdNum}
 	</select>
@@ -171,7 +171,7 @@
 	
 	<!-- 포인트 내역 -->
 	<select id="getPointList" resultType="com.spring.shop.vo.PointVo">
-		SELECT p.pointid, p.memberid, p.accumulatePoint, p.usagePoint, p.point, TO_CHAR(p.pointDate,'YYYY/MM/DD PM HH:MI:SS') AS pointDate, m.name
+		SELECT p.pointid, p.memberid, p.accumulatePoint, p.usagePoint, p.point, TO_CHAR(p.pointDate,'YYYY-MM-DD PM HH:MI:SS') AS pointDate, m.name
 		FROM point p
 		INNER JOIN member m ON m.memberid = p.memberid
 		WHERE p.memberid = #{memberid}
@@ -180,10 +180,10 @@
 	
 	<!-- 포인트 내역 기간 조회 -->
 	<select id="showPointDate" parameterType="hashMap" resultType="com.spring.shop.vo.PointVo">
-		SELECT p.pointid, p.memberid, p.accumulatePoint, p.usagePoint, p.point, TO_CHAR(p.pointDate,'YYYY/MM/DD PM HH:MI:SS') AS pointDate, m.name
+		SELECT p.pointid, p.memberid, p.accumulatePoint, p.usagePoint, p.point, TO_CHAR(p.pointDate,'YYYY-MM-DD PM HH:MI:SS') AS pointDate, m.name
 		FROM point p
 		INNER JOIN member m ON m.memberid = p.memberid
-		WHERE p.pointDate BETWEEN #{startDate} AND #{endDate} AND p.memberid = #{memberid}
+		WHERE TO_CHAR(p.pointDate,'YYYY-MM-DD') BETWEEN #{startDate} AND #{endDate} AND p.memberid = #{memberid}
 		ORDER BY p.pointid DESC
 	</select>
 	

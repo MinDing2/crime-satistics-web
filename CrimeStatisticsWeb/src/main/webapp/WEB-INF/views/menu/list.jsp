@@ -140,6 +140,10 @@ div {
   font-weight: bold; /* 폰트 굵기 설정 */
   font-size: 20px;
 }
+
+footer {
+	margin-top: 40px;
+}
 </style>
 </head>
 <body>

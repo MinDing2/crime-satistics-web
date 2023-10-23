@@ -237,7 +237,7 @@ td {
 }
 
 footer{
-  margin-top:250px;
+  margin-top: 40px;
   bottom: 0;
   width:100%
 }

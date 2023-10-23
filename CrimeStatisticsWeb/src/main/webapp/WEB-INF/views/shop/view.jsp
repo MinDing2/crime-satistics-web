@@ -187,7 +187,15 @@ ul.category-list li {
 		                <div>${review.reviewText}</div>
 		            </div>
 		            <div>
-		                <img src="${review.reviewImg}" alt="Review Image" width="100" height="100">
+		            <c:choose>
+		            	<c:when test="${review.reviewImg ne null}">
+				        	<img src="${review.reviewImg}" width="100" height="100">
+					    </c:when>
+					    <c:otherwise>
+					    	<img src="/img/gray.png" width="100" height="100">
+					    </c:otherwise>
+		            </c:choose>
+		            
 		            </div>
 		        </div>
 		    </c:forEach>

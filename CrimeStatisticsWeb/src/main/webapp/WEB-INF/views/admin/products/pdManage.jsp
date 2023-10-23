@@ -136,7 +136,7 @@ tbody tr td {
     vertical-align: middle; /* 세로 가운데 정렬 */
 }
 footer{
-  position: absolute;
+  margin-top: 40px;
   bottom: 0;
   width:100%
 }

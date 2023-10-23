@@ -190,7 +190,7 @@ public class ShopDaoImpl implements ShopDao {
 
 	// 포인트 내역 기간 조회
 	@Override
-	public List<PointVo> showPointDate(Date startDate, Date endDate, String memberid) {
+	public List<PointVo> showPointDate(String startDate, String endDate, String memberid) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
