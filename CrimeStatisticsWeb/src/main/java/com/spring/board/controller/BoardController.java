@@ -46,15 +46,13 @@ public class BoardController {
 	// 게시물 등록 /board/writeform?menu_id=1
 	@GetMapping("/writeform")
 	public ModelAndView writeform(BoardVo vo, HttpSession session) {
-		// 메뉴 목록 조회
-		List<MenuVo> menuList = menuService.getMenuList();
+		
 		
 		// 세션으로 닉네임 받아오기
 		String nickname = (String)session.getAttribute("nickname");
 
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("nickname", nickname);
-		mv.addObject("menuList", menuList);
+		mv.addObject("nickname", nickname);		
 		mv.addObject("vo", vo);
 		mv.setViewName("board/write");
 		return mv;
@@ -71,7 +69,7 @@ public class BoardController {
 		return mv;
 	}
 	
-	// /Board/View?idx=4&menu_id=MENU01
+	// /Board/View?bnum=4&menu_id=MENU01
 	// 게시물 보기
 	@GetMapping("/view")
 	
