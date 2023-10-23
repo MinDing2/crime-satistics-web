@@ -1,4 +1,3 @@
-
 <%
 String memberid = (String) session.getAttribute("memberid");
 String responseJSON = "{\"loggedIn\": " + (memberid != null) + "}";

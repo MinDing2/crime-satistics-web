@@ -17,8 +17,7 @@ public class BoardRestController {
 	
 	//게시물 삭제
 	@PostMapping("/delete")
-	private void delete(@RequestParam int bnum) {
-		System.out.println(bnum);
+	private void delete(@RequestParam int bnum) {		
 		boardService.deleteBoard(bnum);	
 		
 	}

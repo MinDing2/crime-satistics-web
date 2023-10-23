@@ -52,7 +52,6 @@ public class BoardController {
 		// 세션으로 닉네임 받아오기
 		String nickname = (String)session.getAttribute("nickname");
 
-
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("nickname", nickname);
 		mv.addObject("menuList", menuList);
