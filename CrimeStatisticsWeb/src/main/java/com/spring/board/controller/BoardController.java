@@ -43,7 +43,7 @@ public class BoardController {
 	private LikeService likeService;
 
 
-	// 게시물 등록 /board/writeform?menu_id=1
+	// 게시물 등록
 	@GetMapping("/writeform")
 	public ModelAndView writeform(BoardVo vo, HttpSession session) {
 		

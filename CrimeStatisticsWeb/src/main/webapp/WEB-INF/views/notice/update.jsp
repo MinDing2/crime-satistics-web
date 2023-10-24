@@ -198,6 +198,7 @@ footer{
                   <div style="font-weight: normal; margin-left: 0 auto; text-align: center;">어서오세요!! CSW 관리자님</div>
                </div>               
             </div>
+        </div>
         <!-- 여기에 콘텐츠 넣어보자 -->         
         <!-- 게시물 목록 -->
         <div>
@@ -240,8 +241,8 @@ footer{
                     </td>
                 </tr>
             </table>
-        </form> 
-        </div>
+        </form>
+        </div> 
 	    <!-- 여기까지 오른쪽 컨텐츠 -->
       </div>
    </main>

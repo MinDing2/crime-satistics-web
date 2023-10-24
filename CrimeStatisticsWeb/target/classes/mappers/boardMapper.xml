@@ -93,7 +93,8 @@
 
 		) MB
 		WHERE RNUM between #{rowStart} and #{rowEnd}
-		ORDER BY BNUM DESC
+		ORDER BY
+		BNUM DESC
 	</select>
 
 	<select id="listCount" resultType="int">
@@ -109,7 +110,9 @@
 		SELECT BNUM,MENU_ID,
 		TITLE, CONT, WRITER, REGDATE, READCOUNT, LIKEHIT,
 		ROW_NUMBER()
-		OVER(<include refid="sort"></include>) AS RNUM
+		OVER(
+		<include refid="sort"></include>
+		) AS RNUM
 		FROM BOARD
 		WHERE MENU_ID = #{menu_id}
 		<include refid="search"></include>
@@ -135,18 +138,20 @@
 		</if>
 	</sql>
 	<sql id="sort">
-		<if test="sort== null">
-			ORDER BY BNUM DESC
-		</if>
-		<if test="sort== 'bnum'">
-			ORDER BY BNUM DESC
-		</if>
-		<if test="sort== 'readcount'">
-			ORDER BY READCOUNT DESC
-		</if>
-		<if test="sort== 'likehit'">
-			ORDER BY LIKEHIT DESC
-		</if>
+		<choose>
+			<when test="sort == 'bnum'">
+				ORDER BY BNUM DESC
+			</when>
+			<when test="sort == 'readcount'">
+				ORDER BY READCOUNT DESC
+			</when>
+			<when test="sort == 'likehit'">
+				ORDER BY LIKEHIT DESC
+			</when>
+			<otherwise>
+				ORDER BY BNUM DESC
+			</otherwise>
+		</choose>
 	</sql>
 
 	<!-- 작성한 게시물 수 -->
@@ -155,38 +160,41 @@
 		FROM BOARD
 		WHERE WRITER = #{nickname}
 	</select>
-	
+
 	<!-- 작성한 게시물 목록 -->
-	<select id="myboardList" resultType="com.spring.board.vo.BoardVo">
-	SELECT
+	<select id="myboardList"
+		resultType="com.spring.board.vo.BoardVo">
+		SELECT
 		BNUM
 		, MENU_ID
 		, TITLE
 		, CONT
 		, WRITER
-		, TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE
+		, TO_CHAR(REGDATE, 'YYYY-MM-DD')
+		REGDATE
 		, READCOUNT
 		FROM BOARD
 		WHERE WRITER = #{nickname}
-		ORDER BY BNUM DESC
+		ORDER BY BNUM
+		DESC
 		FETCH FIRST 5 ROWS ONLY
 	</select>
-	
+
 	<!-- 좋아요 누른 게시물 목록 -->
 	<select id="mylikeList" resultType="com.spring.board.vo.BoardVo">
-	        SELECT
-            b.BNUM
-            , b.MENU_ID
-            , b.TITLE
-            , b.CONT
-            , b.WRITER
-            , TO_CHAR(b.REGDATE, 'YYYY-MM-DD') REGDATE
-            , b.READCOUNT
-        FROM BOARD b
-        INNER JOIN LIKES l ON b.BNUM = l.BNUM 
-        WHERE l.MEMBERID = #{memberid} AND l.LIKECHECK = 1
-        ORDER BY BNUM DESC
-        FETCH FIRST 5 ROWS ONLY
+		SELECT
+		b.BNUM
+		, b.MENU_ID
+		, b.TITLE
+		, b.CONT
+		, b.WRITER
+		, TO_CHAR(b.REGDATE, 'YYYY-MM-DD') REGDATE
+		, b.READCOUNT
+		FROM BOARD b
+		INNER JOIN LIKES l ON b.BNUM = l.BNUM
+		WHERE l.MEMBERID = #{memberid} AND l.LIKECHECK = 1
+		ORDER BY BNUM DESC
+		FETCH FIRST 5 ROWS ONLY
 	</select>
 
 </mapper>

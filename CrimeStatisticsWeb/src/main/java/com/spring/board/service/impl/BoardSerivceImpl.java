@@ -24,42 +24,43 @@ public class BoardSerivceImpl implements BoardService {
 		return boardList;
 	}
 
+	// 게시물 작성
 	@Override
 	public void insertBoard(BoardVo vo) {
 		boardDao.insertBoard(vo);
 		
 	}
-
+    // 게시물 조회
 	@Override
 	public BoardVo getView(BoardVo vo) {
 		BoardVo boardVo = boardDao.getView(vo);
 		return boardVo;
 	}
-
+    // 게시물 수정
 	@Override
 	public void updateBoard(BoardVo vo) {
 		boardDao.updateBoard(vo);
 		
 	}
-
+    // 게시물 삭제
 	@Override
 	public void deleteBoard(int bnum) {
 		boardDao.deleteBoard(bnum);
 		
 	}
-
+    // 게시물 조회수
 	@Override
 	public void readCount(BoardVo vo) {
 		boardDao.readCount(vo);
 		
 	}
-
+    // 페이징
 	@Override
 	public List<BoardVo> listPage(Criteria cri) {
 		List<BoardVo> boardList = boardDao.listPage(cri);
 		return boardList;
 	}
-
+    // 페이징 시 게시물 수
 	@Override
 	public int listCount(BoardVo vo) {
 		
@@ -73,7 +74,7 @@ public class BoardSerivceImpl implements BoardService {
 		return boardList;
 	}
   
-	// 검색 + 페이징
+	// 검색 + 페이징 시 게시물 수
 	@Override
 	public int countSearch(SearchCriteria scri) {
 		
